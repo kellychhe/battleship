@@ -1,7 +1,7 @@
 1. Model
    1. Game (board talk) -Kelly
       1. Static fields 
-         1. Create Grid
+         1. Create Grid -done
             1. nested Symbol array 10x10
          2. Max Row = 10
          3. Max Col = 10
