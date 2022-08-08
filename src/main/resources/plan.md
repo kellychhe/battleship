@@ -1,13 +1,16 @@
 1. Model
-   1. Game (board talk)
+   1. Game (board talk) -Kelly
       1. Static fields 
-         1. Num of rows - 10
-         2. Num of columns - 10
-   2. Symbol Enum
+         1. Create Grid
+            1. nested Symbol array 10x10
+         2. Max Row = 10
+         3. Max Col = 10
+         4. State field
+   2. Symbol Enum-Alexx
       1. X - miss (U+0058)
       2. O - hit (U+004F)
       3. S - sink (U+0053)
-   3. Ship Enum
+   3. Ship Enum-Julian
       1. Carrier - 5
       2. Battleship - 4
       3. Destroyer - 3
@@ -19,5 +22,12 @@
       3. East
       4. West
    5. State Enum
+      1. Methods
+         1. 
+      2. USER MOVE
+      3. COMPUTER MOVE
+      4. USER WIN
+      5. COMPUTER WIN
 2. View
 3. Controller
+
