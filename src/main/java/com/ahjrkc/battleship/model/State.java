@@ -25,6 +25,11 @@ public enum State {
   PLAYER_WIN,
   COMPUTER_WIN;
 
+
+
+  private static final String ILLEGAL_MOVE =
+      "Move is either out of bounds of playing grid or on ship that has already been sunk, please select new coordinates";
+
   public boolean isCurrentTurn(){return false;};
 
   public State nextMove(){return null;}

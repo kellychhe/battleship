@@ -1,7 +1,11 @@
 package com.ahjrkc.battleship.model.exceptions;
 
-public class IllegalMoveException {
+public class IllegalMoveException extends IllegalArgumentException {
 
-  // when player tries hitting shit that has already been sunk
+  // when player tries hitting ship that has already been sunk
+  
+  public IllegalMoveException(String message){
+    super(message);
+  }
 
 }
