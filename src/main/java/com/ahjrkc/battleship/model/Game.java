@@ -6,6 +6,7 @@ public class Game {
   public static final int NUM_OF_COLS = 10;
   public final MarkerType[][] grid = new MarkerType[NUM_OF_ROWS][NUM_OF_COLS];
 
+
   // enum for move types
 
   // enum for ship types
