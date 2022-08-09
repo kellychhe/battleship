@@ -1,8 +1,6 @@
 package com.ahjrkc.battleship.controller;
 
-import com.ahjrkc.battleship.model.PlayerShips;
 import com.ahjrkc.battleship.model.Ships.ShipType;
-import com.ahjrkc.battleship.model.exceptions.IllegalPlacementException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
