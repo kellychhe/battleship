@@ -17,24 +17,30 @@ public interface Ships {
   void addPosition(int row, int col, ShipDirection direction);
 
   public enum ShipType {
-    PLAYER_CARRIER(new ArrayList<>(5)),
-    PLAYER_BATTLESHIP(new ArrayList<>(4)),
-    PLAYER_DESTROYER(new ArrayList<>(3)),
-    PLAYER_SUBMARINE(new ArrayList<>(3)),
-    PLAYER_PATROL_BOAT(new ArrayList<>(2)),
-    COMPUTER_CARRIER(new ArrayList<>(5)),
-    COMPUTER_BATTLESHIP(new ArrayList<>(4)),
-    COMPUTER_DESTROYER(new ArrayList<>(3)),
-    COMPUTER_SUBMARINE(new ArrayList<>(3)),
-    COMPUTER_PATROL_BOAT(new ArrayList<>(2));
+    PLAYER_CARRIER(new ArrayList<>(5), "carrier"),
+    PLAYER_BATTLESHIP(new ArrayList<>(4), "battleship"),
+    PLAYER_DESTROYER(new ArrayList<>(3), "destroyer"),
+    PLAYER_SUBMARINE(new ArrayList<>(3), "submarine"),
+    PLAYER_PATROL_BOAT(new ArrayList<>(2), "patrol boat"),
+    COMPUTER_CARRIER(new ArrayList<>(5), "carrier"),
+    COMPUTER_BATTLESHIP(new ArrayList<>(4), "battleship"),
+    COMPUTER_DESTROYER(new ArrayList<>(3), "destroyer"),
+    COMPUTER_SUBMARINE(new ArrayList<>(3), "submarine"),
+    COMPUTER_PATROL_BOAT(new ArrayList<>(2), "patrol boat");
 
     public final ArrayList<int[]> position;
+    public final String name;
 
-    ShipType(ArrayList<int[]> position){
+    ShipType(ArrayList<int[]> position, String name){
       this.position = position;
+      this.name = name;
     }
     public ArrayList<int[]> getPosition() {
       return position;
+    }
+
+    public String getName() {
+      return name;
     }
   }
 
