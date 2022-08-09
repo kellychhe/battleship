@@ -3,6 +3,7 @@ package com.ahjrkc.battleship.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
 public interface Ships {
 
   Collection<ShipDirection> availableDirection(int row, int col, ShipType type);
@@ -17,6 +18,9 @@ public interface Ships {
   void addPosition(int row, int col, ShipDirection direction);
 
   public enum ShipType {
+    // General Rule: Enums should not have a mutable state.
+    // Dont store location of ships to enum, dont have diff ship type for two players
+    // This enum should go into it's own file
     PLAYER_CARRIER(new ArrayList<>(5), "carrier"),
     PLAYER_BATTLESHIP(new ArrayList<>(4), "battleship"),
     PLAYER_DESTROYER(new ArrayList<>(3), "destroyer"),
@@ -28,7 +32,8 @@ public interface Ships {
     COMPUTER_SUBMARINE(new ArrayList<>(3), "submarine"),
     COMPUTER_PATROL_BOAT(new ArrayList<>(2), "patrol boat");
 
-    public final ArrayList<int[]> position;
+    // change to size only
+    public final int position;
     public final String name;
 
     ShipType(ArrayList<int[]> position, String name){

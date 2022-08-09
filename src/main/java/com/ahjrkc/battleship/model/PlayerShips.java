@@ -10,8 +10,9 @@ import java.util.stream.Stream;
 
 public class PlayerShips implements Ships{
 
+
   @Override
-  public List<ShipDirection> availableDirection(int row, int col, ShipType type) {
+  public static List<ShipDirection> availableDirection(int row, int col, ShipType type) {
     List<ShipDirection> validDirections = new ArrayList<>();
     if (isNorthAvailable(row, col, type)){
       validDirections.add(ShipDirection.NORTH);

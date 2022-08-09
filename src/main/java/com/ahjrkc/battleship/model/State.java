@@ -2,6 +2,12 @@ package com.ahjrkc.battleship.model;
 
 public enum State {
 
+  // game begins as user placing ship (computer can place ships first or after)
+
+  // first move (computer or user)
+
+  // five states: placement, movement, repeat turns (if hit), player winner, cpu winner
+
   PLAYER_MOVE{
     @Override
     public boolean isCurrentTurn(){return true;};
