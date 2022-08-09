@@ -25,7 +25,7 @@ public enum Ships {
 
   // work for 8/9
   public int[] placementCheck(int row, int col, ShipDirection direction){
-
+    return new int[0];
   }
 
   //work on 8/9
