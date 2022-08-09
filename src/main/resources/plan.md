@@ -37,5 +37,6 @@
       1. read coordinates user enters // compare to Nicks || 
       2. Ships.java placementCheck // JuJu attempt
       3. Ships class for player and CPU extends Ships enum // Alexx
+         1. Can't extend an enum, create ships class with default methods (empty for now) and unique fields
       4. hitCounter(least of worries for now) // TBD
 
