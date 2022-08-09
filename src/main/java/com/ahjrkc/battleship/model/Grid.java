@@ -7,7 +7,7 @@ import java.util.Random;
 
 public interface Grid {
 
-  Ships ships[] = Ships.values();
+  Ships ships[] = null;
   ShipDirection shipDirection[] = ShipDirection.values();
   Random rng = new SecureRandom();
 

@@ -2,26 +2,18 @@ package com.ahjrkc.battleship.model;
 
 import java.util.ArrayList;
 
-public enum Ships {
-
-  CARRIER(5) ,
-  BATTLESHIP(4),
-  DESTROYER(3),
-  SUBMARINE(3),
-  PATROL_BOAT(2);
-
-  private final int spacesFilled;
+public class Ships {
   public int hitCount;
   public static ArrayList<int[]> Coordinates;
 
-  Ships(int spacesFilled){
-    this.spacesFilled = spacesFilled;
+  public ShipDirection[] availableDirection(int row, int col, ShipType type){
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
-  // work for 8/9
-  public int getSpacesFilled() {
-    return spacesFilled;
+  public void addPosition(int row, int col, ShipDirection direction){
+
   }
+
 
   // work for 8/9
   public int[] placementCheck(int row, int col, ShipDirection direction){
@@ -33,5 +25,25 @@ public enum Ships {
     // algorithm
     // hitCount++;
     return hitCount;
+  }
+  public enum ShipType {
+    CARRIER(5) ,
+    BATTLESHIP(4),
+    DESTROYER(3),
+    SUBMARINE(3),
+    PATROL_BOAT(2);
+
+    public final int spacesFilled;
+
+    ShipType(int spacesFilled){
+      this.spacesFilled = spacesFilled;
+    }
+
+    // work for 8/9
+    public int getSpacesFilled() {
+      return spacesFilled;
+    }
+
+
   }
 }
