@@ -1,5 +1,7 @@
 package com.ahjrkc.battleship.model;
 
+import java.util.ArrayList;
+
 public enum Ships {
 
   CARRIER(5) ,
@@ -9,12 +11,27 @@ public enum Ships {
   PATROL_BOAT(2);
 
   private final int spacesFilled;
+  public int hitCount;
+  public static ArrayList<int[]> Coordinates;
 
   Ships(int spacesFilled){
     this.spacesFilled = spacesFilled;
   }
 
+  // work for 8/9
   public int getSpacesFilled() {
     return spacesFilled;
+  }
+
+  // work for 8/9
+  public int[] placementCheck(int row, int col, ShipDirection direction){
+
+  }
+
+  //work on 8/9
+  public int hitCounter(){
+    // algorithm
+    // hitCount++;
+    return hitCount;
   }
 }
