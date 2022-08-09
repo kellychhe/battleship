@@ -1,8 +1,25 @@
 package com.ahjrkc.battleship.model.exceptions;
 
-public class IllegalPlacementException {
+/**
+ * <p>The IllegalPlacementException can be thrown if the user/player tries to
+ * place a ship where one already exists (or close to it) as well as if the user/player attempts to
+ * place a ship out of bounds.</p>
+ */
+public class IllegalPlacementException extends IllegalArgumentException {
 
-// When someone tries to place a ship where another ships are already placed
-  // Also when trying to place out of bounds
+  public IllegalPlacementException() {
+  }
+
+  public IllegalPlacementException(String s) {
+    super(s);
+  }
+
+  public IllegalPlacementException(String message, Throwable cause) {
+    super(message, cause);
+  }
+
+  public IllegalPlacementException(Throwable cause) {
+    super(cause);
+  }
 
 }
