@@ -21,4 +21,7 @@ public class Game {
   // player win
 
   // cpu win
+
+  // Have a throws clause for IllegalPlacementException (extends IllegalArgumentException (checked)
+  // Have a throws clause for GameOverException (extends IllegalStateException) (checked)
 }
