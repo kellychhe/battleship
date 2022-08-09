@@ -1,12 +1,7 @@
 package com.ahjrkc.battleship.model;
 
-import com.ahjrkc.battleship.model.exceptions.IllegalPlacementException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public interface Ships {
 
@@ -14,40 +9,13 @@ public interface Ships {
 
   boolean isNorthAvailable(int row, int col, ShipType type);
 
-  static boolean isSouthAvailable( int col, ShipType type){
-    int shipCapacity = type.position.size();
-    if(shipCapacity + col * ShipDirection.SOUTH.getSign() > 10){
-      return false;
-    } else{
-      return true;
-    }
-  }
+  boolean isSouthAvailable( int col, ShipType type);
 
-  static boolean isWestAvailable(int row, ShipType type){
-    int shipCapacity = type.position.size();
-    if(shipCapacity + row * ShipDirection.WEST.getSign() < 0){
-      return false;
-    } else{
-      return true;
-    }
-  }
+  boolean isWestAvailable(int row, ShipType type);
 
-  static boolean isEastAvailable(int row, ShipType type){
-    int shipCapacity = type.position.size();
-    if(shipCapacity + row * ShipDirection.EAST.getSign() > 10){
-      return false;
-    } else{
-      return true;
-    }
-  }
+  boolean isEastAvailable(int row, ShipType type);
   void addPosition(int row, int col, ShipDirection direction);
 
-  //work on 8/9
-//  public int hitCounter(){
-//    // algorithm
-//    // hitCount++;
-//    return hitCount;
-//  }
   public enum ShipType {
     PLAYER_CARRIER(new ArrayList<>(5)),
     PLAYER_BATTLESHIP(new ArrayList<>(4)),
