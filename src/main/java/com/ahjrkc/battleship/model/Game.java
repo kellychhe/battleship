@@ -1,11 +1,15 @@
 package com.ahjrkc.battleship.model;
 
+import java.util.ArrayList;
+
 public class Game {
 
   public static final int NUM_OF_ROWS = 10;
   public static final int NUM_OF_COLS = 10;
-  public final MarkerType[][] grid = new MarkerType[NUM_OF_ROWS][NUM_OF_COLS];
 
+  public ArrayList<int[]> miss = new ArrayList<>();
+  public ArrayList<int[]> hits = new ArrayList<>();
+  public ArrayList<int[]> sink = new ArrayList<>();
 
   // enum for move types
 

@@ -2,66 +2,69 @@ package com.ahjrkc.battleship.model;
 
 import com.ahjrkc.battleship.model.exceptions.IllegalPlacementException;
 import java.util.ArrayList;
+import java.util.Collection;
 
-public class Ships {
-  public int hitCount;
-  public static ArrayList<int[]> Coordinates;
+public interface Ships {
 
-  public ShipDirection[] availableDirection(int row, int col, ShipType type){
-    throw new UnsupportedOperationException("Not yet implemented");
+  static Collection<ShipDirection> availableDirection(int row, int col, ShipType type){
+    Collection<ShipDirection> validDirections = new ArrayList<>();
+    if (isNorthAvailable(col, type)){
+      validDirections.add(ShipDirection.NORTH);
+    } else if (isSouthAvailable(col, type)){
+      validDirections.add(ShipDirection.SOUTH);
+    } else if (isWestAvailable(row, type)){
+      validDirections.add(ShipDirection.WEST);
+    } else if (isEastAvailable(row, type)){
+      validDirections.add(ShipDirection.EAST);
+    } else {
+      throw new IllegalPlacementException("Ship can not be placed here, please try again.");
+    }
+    return validDirections;
   }
 
-  public boolean isNorthAvailable( int col, ShipType type){
+  static boolean isNorthAvailable( int col, ShipType type){
     int shipCapacity = type.getSpacesFilled();
     if(shipCapacity + col * ShipDirection.NORTH.getSign() < 0){
-      throw new IllegalPlacementException("Ship can not be placed here, please try again.");
+      return false;
     } else{
       return true;
     }
   }
 
-  public boolean isSouthAvailable( int col, ShipType type){
+  static boolean isSouthAvailable( int col, ShipType type){
     int shipCapacity = type.getSpacesFilled();
     if(shipCapacity + col * ShipDirection.SOUTH.getSign() > 10){
-      throw new IllegalPlacementException("Ship can not be placed here, please try again.");
+      return false;
     } else{
       return true;
     }
   }
 
-  public boolean isWestAvailable(int row, ShipType type){
+  static boolean isWestAvailable(int row, ShipType type){
     int shipCapacity = type.getSpacesFilled();
     if(shipCapacity + row * ShipDirection.WEST.getSign() < 0){
-      throw new IllegalPlacementException("Ship can not be placed here, please try again.");
+      return false;
     } else{
       return true;
     }
   }
 
-  public boolean isEastAvailable(int row, ShipType type){
+  static boolean isEastAvailable(int row, ShipType type){
     int shipCapacity = type.getSpacesFilled();
     if(shipCapacity + row * ShipDirection.EAST.getSign() > 10){
-      throw new IllegalPlacementException("Ship can not be placed here, please try again.");
+      return false;
     } else{
       return true;
     }
   }
-  public void addPosition(int row, int col, ShipDirection direction){
-
-  }
-
-
-  // work for 8/9
-  public int[] placementCheck(int row, int col, ShipDirection direction){
-    throw new UnsupportedOperationException("Not yet implemented");
-  }
+  void addPosition(int row, int col, ShipDirection direction);
 
   //work on 8/9
-  public int hitCounter(){
-    // algorithm
-    // hitCount++;
-    return hitCount;
-  }
+//  public int hitCounter(){
+//    // algorithm
+//    // hitCount++;
+//    return hitCount;
+//  }
   public enum ShipType {
     CARRIER(5) ,
     BATTLESHIP(4),
