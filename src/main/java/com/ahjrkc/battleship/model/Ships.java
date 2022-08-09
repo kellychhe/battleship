@@ -1,5 +1,6 @@
 package com.ahjrkc.battleship.model;
 
+import com.ahjrkc.battleship.model.exceptions.IllegalPlacementException;
 import java.util.ArrayList;
 
 public class Ships {
@@ -13,7 +14,7 @@ public class Ships {
   public boolean isNorthAvailable( int col, ShipType type){
     int shipCapacity = type.getSpacesFilled();
     if(shipCapacity + col * ShipDirection.NORTH.getSign() < 0){
-      return false;
+      throw new IllegalPlacementException("Ship can not be placed here, please try again.");
     } else{
       return true;
     }
@@ -22,7 +23,7 @@ public class Ships {
   public boolean isSouthAvailable( int col, ShipType type){
     int shipCapacity = type.getSpacesFilled();
     if(shipCapacity + col * ShipDirection.SOUTH.getSign() > 10){
-      return false;
+      throw new IllegalPlacementException("Ship can not be placed here, please try again.");
     } else{
       return true;
     }
@@ -31,7 +32,7 @@ public class Ships {
   public boolean isWestAvailable(int row, ShipType type){
     int shipCapacity = type.getSpacesFilled();
     if(shipCapacity + row * ShipDirection.WEST.getSign() < 0){
-      return false;
+      throw new IllegalPlacementException("Ship can not be placed here, please try again.");
     } else{
       return true;
     }
@@ -40,7 +41,7 @@ public class Ships {
   public boolean isEastAvailable(int row, ShipType type){
     int shipCapacity = type.getSpacesFilled();
     if(shipCapacity + row * ShipDirection.EAST.getSign() > 10){
-      return false;
+      throw new IllegalPlacementException("Ship can not be placed here, please try again.");
     } else{
       return true;
     }
