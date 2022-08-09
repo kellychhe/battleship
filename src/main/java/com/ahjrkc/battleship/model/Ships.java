@@ -3,36 +3,19 @@ package com.ahjrkc.battleship.model;
 import com.ahjrkc.battleship.model.exceptions.IllegalPlacementException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public interface Ships {
 
-  static Collection<ShipDirection> availableDirection(int row, int col, ShipType type){
-    Collection<ShipDirection> validDirections = new ArrayList<>();
-    if (isNorthAvailable(col, type)){
-      validDirections.add(ShipDirection.NORTH);
-    } else if (isSouthAvailable(col, type)){
-      validDirections.add(ShipDirection.SOUTH);
-    } else if (isWestAvailable(row, type)){
-      validDirections.add(ShipDirection.WEST);
-    } else if (isEastAvailable(row, type)){
-      validDirections.add(ShipDirection.EAST);
-    } else {
-      throw new IllegalPlacementException("Ship can not be placed here, please try again.");
-    }
-    return validDirections;
-  }
+  Collection<ShipDirection> availableDirection(int row, int col, ShipType type);
 
-  static boolean isNorthAvailable( int col, ShipType type){
-    int shipCapacity = type.getSpacesFilled();
-    if(shipCapacity + col * ShipDirection.NORTH.getSign() < 0){
-      return false;
-    } else{
-      return true;
-    }
-  }
+  boolean isNorthAvailable(int row, int col, ShipType type);
 
   static boolean isSouthAvailable( int col, ShipType type){
-    int shipCapacity = type.getSpacesFilled();
+    int shipCapacity = type.position.size();
     if(shipCapacity + col * ShipDirection.SOUTH.getSign() > 10){
       return false;
     } else{
@@ -41,7 +24,7 @@ public interface Ships {
   }
 
   static boolean isWestAvailable(int row, ShipType type){
-    int shipCapacity = type.getSpacesFilled();
+    int shipCapacity = type.position.size();
     if(shipCapacity + row * ShipDirection.WEST.getSign() < 0){
       return false;
     } else{
@@ -50,7 +33,7 @@ public interface Ships {
   }
 
   static boolean isEastAvailable(int row, ShipType type){
-    int shipCapacity = type.getSpacesFilled();
+    int shipCapacity = type.position.size();
     if(shipCapacity + row * ShipDirection.EAST.getSign() > 10){
       return false;
     } else{
@@ -66,23 +49,25 @@ public interface Ships {
 //    return hitCount;
 //  }
   public enum ShipType {
-    CARRIER(5) ,
-    BATTLESHIP(4),
-    DESTROYER(3),
-    SUBMARINE(3),
-    PATROL_BOAT(2);
+    PLAYER_CARRIER(new ArrayList<>(5)),
+    PLAYER_BATTLESHIP(new ArrayList<>(4)),
+    PLAYER_DESTROYER(new ArrayList<>(3)),
+    PLAYER_SUBMARINE(new ArrayList<>(3)),
+    PLAYER_PATROL_BOAT(new ArrayList<>(2)),
+    COMPUTER_CARRIER(new ArrayList<>(5)),
+    COMPUTER_BATTLESHIP(new ArrayList<>(4)),
+    COMPUTER_DESTROYER(new ArrayList<>(3)),
+    COMPUTER_SUBMARINE(new ArrayList<>(3)),
+    COMPUTER_PATROL_BOAT(new ArrayList<>(2));
 
-    public final int spacesFilled;
+    public final ArrayList<int[]> position;
 
-    ShipType(int spacesFilled){
-      this.spacesFilled = spacesFilled;
+    ShipType(ArrayList<int[]> position){
+      this.position = position;
     }
-
-    // work for 8/9
-    public int getSpacesFilled() {
-      return spacesFilled;
+    public ArrayList<int[]> getPosition() {
+      return position;
     }
-
-
   }
+
 }
