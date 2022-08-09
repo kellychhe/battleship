@@ -10,6 +10,41 @@ public class Ships {
     throw new UnsupportedOperationException("Not yet implemented");
   }
 
+  public boolean isNorthAvailable( int col, ShipType type){
+    int shipCapacity = type.getSpacesFilled();
+    if(shipCapacity + col * ShipDirection.NORTH.getSign() < 0){
+      return false;
+    } else{
+      return true;
+    }
+  }
+
+  public boolean isSouthAvailable( int col, ShipType type){
+    int shipCapacity = type.getSpacesFilled();
+    if(shipCapacity + col * ShipDirection.SOUTH.getSign() > 10){
+      return false;
+    } else{
+      return true;
+    }
+  }
+
+  public boolean isWestAvailable(int row, ShipType type){
+    int shipCapacity = type.getSpacesFilled();
+    if(shipCapacity + row * ShipDirection.WEST.getSign() < 0){
+      return false;
+    } else{
+      return true;
+    }
+  }
+
+  public boolean isEastAvailable(int row, ShipType type){
+    int shipCapacity = type.getSpacesFilled();
+    if(shipCapacity + row * ShipDirection.EAST.getSign() > 10){
+      return false;
+    } else{
+      return true;
+    }
+  }
   public void addPosition(int row, int col, ShipDirection direction){
 
   }
