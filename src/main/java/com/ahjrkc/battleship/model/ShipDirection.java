@@ -20,4 +20,6 @@ public enum ShipDirection {
   public int getSign() {
     return sign;
   }
+
+
 }
