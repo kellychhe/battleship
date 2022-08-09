@@ -9,11 +9,11 @@ public interface Ships {
 
   boolean isNorthAvailable(int row, int col, ShipType type);
 
-  boolean isSouthAvailable( int col, ShipType type);
+  boolean isSouthAvailable(int row, int col, ShipType type);
 
-  boolean isWestAvailable(int row, ShipType type);
+  boolean isWestAvailable(int row, int col, ShipType type);
 
-  boolean isEastAvailable(int row, ShipType type);
+  boolean isEastAvailable(int row, int col, ShipType type);
   void addPosition(int row, int col, ShipDirection direction);
 
   public enum ShipType {
