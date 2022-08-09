@@ -34,8 +34,8 @@
 2. View
 3. Controller
    1. 8/9 
-      1. read coordinates user enters
-      2. Ships.java placementCheck
-      3. Ships class for player and CPU extends Ships enum
-      4. hitCounter(least of worries for now)
+      1. read coordinates user enters // compare to Nicks || 
+      2. Ships.java placementCheck // JuJu attempt
+      3. Ships class for player and CPU extends Ships enum // Alexx
+      4. hitCounter(least of worries for now) // TBD
 
