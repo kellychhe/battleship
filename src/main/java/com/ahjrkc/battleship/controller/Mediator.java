@@ -17,21 +17,15 @@ public class Mediator {
 
   // alternates between states
 
-  public int rowCoordinate;
-  public int colCoordinate;
-
-  private ShipType[] playerShips = new ShipType[]
-      {ShipType.PLAYER_CARRIER, ShipType.PLAYER_BATTLESHIP, ShipType.PLAYER_DESTROYER, ShipType.PLAYER_SUBMARINE, ShipType.PLAYER_PATROL_BOAT};
-
   public void playerSetShips() {
     // open buffered reader outside of loop without try with resources, can quit prematurely
-    for (ShipType ship : playerShips) {
-      // dont want to do in loop
-      try (
-          Reader reader = new InputStreamReader(System.in);
-          BufferedReader buffer = new BufferedReader(reader);
-          ) {
-        System.out.printf("It is time to pick the coordinates to set your ships! Let's place your %s.", ship.getName());
+    Reader reader = new InputStreamReader(System.in);
+    BufferedReader buffer = new BufferedReader(reader);
+    // dont want to do in loop
+      for (ShipType ship : playerShips) {
+        System.out.printf(
+            "It is time to pick the coordinates to set your ships! Let's place your %s.",
+            ship.getName());
         // gets rid of whitespace, captures user input
         String input = buffer.readLine().trim();
         // consider extracting a method to use for placement and shooting, put everything in while loop to capture invalid inputs
@@ -49,16 +43,10 @@ public class Mediator {
             .toArray();
 //        rowCoordinate, colCoordinate = Integer.parseInt(buffer.readLine());
 //        colCoordinate = Integer.parseInt(buffer.readLine());
-        if (PlayerShips.availableDirection(rowCoordinate, colCoordinate, ship).size() == 0) {
-
-        }
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
     }
   }
 
   // Write a method that prompts the reader for the coordinates to place their ships
-      // incorporate loop to ask for each ship
-      // return the coordinates for each ship to the PlayerShips for ship placement (addPosition method)
+  // incorporate loop to ask for each ship
+  // return the coordinates for each ship to the PlayerShips for ship placement (addPosition method)
 }

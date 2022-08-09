@@ -10,8 +10,24 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
 public class Ships {
+
+  ShipType type;
+
+  ArrayList<int[]> placement;
+
+  ArrayList<Boolean> hitTracker;
+
+  // Constructor to create ship with type
+    // instantiate with false values
+    // type.getSpaces() & add false
+    // maybe put a stream
+
+  // Methods to Code for Ships
+    // checks occupied coordinates for placement/in general
+    // review hits
+    // is it sunk
+
 
   public Random rng = new SecureRandom();
 

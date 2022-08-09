@@ -1,14 +1,6 @@
 1. Model
-   1. Game (board talk) -Kelly
-      1. Static fields 
-         1. Create Grid -done
-            1. nested Symbol array 10x10
-         2. Max Row = 10
-         3. Max Col = 10
-         4. State field
-      2. Grid Interface with two classes that extend it (PlayerGrid & ComputerGrid)
-         1. Player Grid houses the methods to set up the player's grid
-         2. Computer Grid will house the random CPU set up methods
+   1. Game (board talk) -Kelly 
+      1. NO BOARD 
    2. Symbol Enum-Alexx
       1. X - miss (U+0058)
       2. O - hit (U+004F)
@@ -39,4 +31,13 @@
       3. Ships class for player and CPU extends Ships enum // Alexx
          1. Can't extend an enum, create ships class with default methods (empty for now) and unique fields
       4. hitCounter(least of worries for now) // TBD
+4. Presentation
+   1. Blue Jawn with a Sailor Hat
+
+- Mentor Meeting Focuses:
+  - Want to: 
+    - Work on Game method
+      - Constructor, Methods (What should we consider and what should they do)
+      - When to switch States
+    - Main Class => Get user interaction
 
