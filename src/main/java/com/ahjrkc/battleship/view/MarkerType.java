@@ -1,4 +1,4 @@
-package com.ahjrkc.battleship.model;
+package com.ahjrkc.battleship.view;
 
 /**\
  * <p>This enum contains the markers for our game board. As the player and CPU make a move, the following

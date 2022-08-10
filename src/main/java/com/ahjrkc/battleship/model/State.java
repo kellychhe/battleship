@@ -13,8 +13,19 @@ public enum State {
   PLACEMENT,
   PLAYER_MOVEMENT,
   CPU_MOVEMENT,
-  PLAYER_WIN,
-  CPU_WIN;
+  // have methods in state do work = example of OOP
+  PLAYER_WIN {
+    @Override
+    public boolean isTerminal() {
+      return true;
+    }
+  },
+  CPU_WIN {
+    @Override
+    public boolean isTerminal() {
+      return true;
+    }
+  };
 
 //  PLAYER_MOVE{
 //    @Override
@@ -48,4 +59,8 @@ public enum State {
 
   public static final String ILLEGAL_MOVE =
       "Move is either out of bounds of playing grid or on ship that has already been sunk, please select new coordinates";
+
+  public boolean isTerminal() {
+    return false;
+  }
 }

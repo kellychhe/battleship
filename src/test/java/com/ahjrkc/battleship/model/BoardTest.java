@@ -17,8 +17,8 @@ class BoardTest {
     ShipType type = ShipType.PATROL_BOAT;
     board.placeShip(type, placement);
 
-    ArrayList<Ships> expected = new ArrayList<>();
-    expected.add(new Ships(type, placement));
+    ArrayList<Ship> expected = new ArrayList<>();
+    expected.add(new Ship(type, placement));
 
     assertEquals(expected.size(), board.ships.size());
   }

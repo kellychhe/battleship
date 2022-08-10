@@ -63,6 +63,7 @@ public class Game {
     System.out.println("Ahoy there Matey! What is your name?");
     playerName = buffer.readLine().trim();
     System.out.printf("Welcome to Battleship, %s", playerName);
+    // do you want to place your ships yourself or randomly? => use cpu
   }
 
   // get the ship placement from reader :D
