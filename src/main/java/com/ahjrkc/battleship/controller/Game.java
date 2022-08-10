@@ -66,6 +66,9 @@ public class Game {
             placementSuccess = true;
           }
         }
+        if (!placementSuccess) {
+          System.out.printf("Sorry %s, that is not a valid place for your ship :(", playerName);
+        }
       }
       // conditional: if ship is not placed, then ask for coordinates again
     }
