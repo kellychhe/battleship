@@ -2,6 +2,7 @@ package com.ahjrkc.battleship.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Board {
 
@@ -9,7 +10,6 @@ public class Board {
   public ArrayList<Ships> ships = new ArrayList<>();
 
   // Build constructor or get beat up
-
 
 
   public void placeShip(ShipType type, ArrayList<int[]> placement) {
@@ -20,9 +20,36 @@ public class Board {
   }
 
   public boolean isConflict(ArrayList<int[]> placement) {
+    ArrayList<int[]> allShipPlacements = getAllShipPlacements();
     // do any coordinates overlap with other ships already placed
+    for (int[] place : placement) {
+      for (int num : place) {
+        if (num < 0 || num > 10) {
+          return true;
+        }
+      }
+      for (int[] currentPlace : allShipPlacements) {
+        if (Arrays.equals(place, currentPlace)) {
+          return true;
+        }
+      }
+    }
+
     return false;
   }
+
+  private ArrayList<int[]> getAllShipPlacements() {
+    ArrayList<int[]> allShipPlacements = new ArrayList<>();
+
+    for (Ships ship : ships) {
+      allShipPlacements.addAll(ship.getPlacement());
+    }
+    return allShipPlacements;
+  }
+
+//  public boolean isShipInbounds(){
+//
+//  }
 
   public boolean areAllShipsSunk() {
     // check ships for isSunk
@@ -43,17 +70,17 @@ public class Board {
   }
 
   public boolean isRepeatShot(int[] shot) {
-    ArrayList<int[]> allShots = new ArrayList<>();
+    List<int[]> allShots = new ArrayList<>();
     // if the coordinates is in the misses array or is a coordinate that was already hit return true
-    for(Ships ship : ships){
-      for(int i = 0; i < ship.placement.size() ; i++ ){
-        if(ship.hitTracker.get(i)){
+    for (Ships ship : ships) {
+      for (int i = 0; i < ship.placement.size(); i++) {
+        if (ship.hitTracker.get(i)) {
           allShots.add(ship.placement.get(i));
         }
       }
     }
 
-  allShots.addAll(misses);
+    allShots.addAll(misses);
 
     for (int[] allShot : allShots) {
       if (Arrays.equals(shot, allShot)) {

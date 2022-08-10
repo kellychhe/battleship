@@ -1,14 +1,15 @@
 package com.ahjrkc.battleship.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Ships {
 
   ShipType type;
 
-  ArrayList<int[]> placement;
+  public List<int[]> placement = new ArrayList<>();
 
-  ArrayList<Boolean> hitTracker;
+  public List<Boolean> hitTracker = new ArrayList<>();
 
   public Ships(ShipType type, ArrayList<int[]> placement) {
     this.type = type;
@@ -55,7 +56,7 @@ public class Ships {
     this.type = type;
   }
 
-  public ArrayList<int[]> getPlacement() {
+  public List<int[]> getPlacement() {
     return placement;
   }
 
@@ -63,7 +64,7 @@ public class Ships {
     this.placement = placement;
   }
 
-  public ArrayList<Boolean> getHitTracker() {
+  public List<Boolean> getHitTracker() {
     return hitTracker;
   }
 
