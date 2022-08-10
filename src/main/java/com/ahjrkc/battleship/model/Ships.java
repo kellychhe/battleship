@@ -1,6 +1,7 @@
 package com.ahjrkc.battleship.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Ships {
@@ -21,10 +22,9 @@ public class Ships {
   }
   // leave orientation to the controller
 
-  public boolean processEachHit(int row, int col) {
+  public boolean processEachHit(int[] shot) {
     for (int i = 0; i < placement.size(); i++) {
-      int[] section = placement.get(i);
-      if (section[0] == row && section[1] == col) {
+      if (Arrays.equals(placement.get(i), shot)) {
         hitTracker.set(i, true);
         return true;
       }

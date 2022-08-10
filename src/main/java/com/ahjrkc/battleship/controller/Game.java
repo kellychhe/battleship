@@ -64,7 +64,7 @@ public class Game {
       }
 
       while (!placementSuccess) {
-        int[] coordinates = board.equals(player) ? grabUserCoordinates() : randomCoordinates();
+        int[] coordinates = board.equals(player) ? grabUserCoordinates() : grabRandomCoordinates();
         for (ShipDirection direction : directions) {
           ArrayList<int[]> placement = createPlacement(ship, coordinates, direction);
           if (!board.isConflict(placement)){
@@ -145,7 +145,7 @@ public class Game {
     return shot;
   }
 
-  public int[] randomCoordinates() {
+  public int[] grabRandomCoordinates() {
     int row = rng.nextInt(NUM_OF_ROWS);
     int col = rng.nextInt(NUM_OF_COLS);
 
