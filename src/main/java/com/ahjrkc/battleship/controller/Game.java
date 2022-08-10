@@ -7,7 +7,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 /**
@@ -17,6 +19,8 @@ public class Game {
 
   public static final int NUM_OF_ROWS = 10;
   public static final int NUM_OF_COLS = 10;
+  public Random rng = new SecureRandom();
+
   // Do not delete below, helps with filtering user coordinates.
   private static final Pattern INPUT_SPLITTER = Pattern.compile("\\D+");
 
@@ -49,24 +53,26 @@ public class Game {
   }
 
   // get the ship placement from reader :D
-  public void playerSetShips() throws IOException {
+  public void setShips(Board board) throws IOException {
 
     for (ShipType ship : fleet) {
       boolean placementSuccess = false;
 
-      System.out.printf("Okay %1$s, it's time to place your %2$s on the board!",
-            playerName, ship.getName());
+      if (board.equals(player)) {
+        System.out.printf("Okay %1$s, it's time to place your %2$s on the board!",
+              playerName, ship.getName());
+      }
 
       while (!placementSuccess) {
-        int[] coordinates = grabUserCoordinates();
+        int[] coordinates = board.equals(player) ? grabUserCoordinates() : randomCoordinates();
         for (ShipDirection direction : directions) {
           ArrayList<int[]> placement = createPlacement(ship, coordinates, direction);
-          if (!player.isConflict(placement)){
-            player.placeShip(ship, placement);
+          if (!board.isConflict(placement)){
+            board.placeShip(ship, placement);
             placementSuccess = true;
           }
         }
-        if (!placementSuccess) {
+        if (!placementSuccess && board.equals(player)) {
           System.out.printf("Sorry %s, that is not a valid place for your ship :(", playerName);
         }
       }
@@ -84,8 +90,33 @@ public class Game {
       // outside of while loop => placeShip method (
   }
 
-  public ArrayList<int[]> createPlacement(ShipType ship, int[] coordinates, ShipDirection Direction) {
-    throw new UnsupportedOperationException("Not yet implemented");
+  public ArrayList<int[]> createPlacement(ShipType ship, int[] coordinates, ShipDirection direction) {
+    ArrayList<int[]> placement = new ArrayList<>();
+    int row = coordinates[0];
+    int col = coordinates[1];
+    switch(direction) {
+      case NORTH:
+        for (int i = row; i < ship.spacesFilled; i++){
+          placement.add(new int[]{row - i, col});
+        }
+        break;
+      case SOUTH:
+        for (int i = row; i < ship.spacesFilled; i++){
+          placement.add(new int[]{row + i, col});
+        }
+        break;
+      case WEST:
+        for (int i = col; i < ship.spacesFilled; i++){
+          placement.add(new int[]{row, col - i});
+        }
+        break;
+      case EAST:
+        for (int i = col; i < ship.spacesFilled; i++){
+          placement.add(new int[]{row, col + i});
+        }
+        break;
+    }
+    return placement;
   }
   // Create a method createPlacement(ShipType ship, int[] coordinates, ShipDirection Direction)
   // Switch cases => based on direction
@@ -106,12 +137,20 @@ public class Game {
           .map(String::trim)
           .filter((s) -> !s.isEmpty())
           .mapToInt(Integer::parseInt)
-          .filter((value) -> value >= 0 && value < 10)
+          .filter((value) -> value >= 0 && value < NUM_OF_ROWS)
           .limit(2)
           .toArray();
     } while (shot.length != 2);
 
     return shot;
+  }
+
+  public int[] randomCoordinates() {
+    int row = rng.nextInt(NUM_OF_ROWS);
+    int col = rng.nextInt(NUM_OF_COLS);
+
+    return new int[]{row, col};
+
   }
 
   // use do while loop to keep coordinates in bounds, repeat prompting if they dont get it
