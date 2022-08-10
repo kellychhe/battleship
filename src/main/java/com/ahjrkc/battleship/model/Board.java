@@ -4,6 +4,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <p>This board class is responsible for the methods that allow gameplay, accounting for all hits,
+ * misses and placements</p>
+ * <ul>
+ *   <li>isConflict: this method checks for the two possible placement conflicts.
+ *   The possible conflicts being placement out of bounds of the board and ships overlapping</li>
+ *
+ *   <li>getAllShipPlacements: grabs all coordinates for each ship and places them into and
+ *   ArrayList of integers</li>
+ *
+ *   <li>areAllShipsSunk: iterates through all ships on board and invokes isSunk method from ships class.
+ *   This is to determine if all ships for that board instance/player are sunk.</li>
+ *
+ *   <li>addMiss: when a shot is taken by the cpu or player, if the shot does not hit a ship the shot is
+ *   , the miss is added to the board's misses array</li>
+ *
+ *   <li>isRepeatShot: accumulates all moves, hits or misses, for that player into and ArrayList of "allShots"
+ *   and iterates through them to determine if that shot has already been made.</li>
+ * </ul>
+ */
 public class Board {
 
   // change to general, instance type can stay the same
