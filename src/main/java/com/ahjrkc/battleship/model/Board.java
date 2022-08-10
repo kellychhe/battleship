@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 public class Board {
 
-  public ArrayList<int[]> misses;
-  public ArrayList<Ships> ships;
+  public ArrayList<int[]> misses = new ArrayList<>();
+  public ArrayList<Ships> ships = new ArrayList<>();
 
   // Build constructor or get beat up
 
@@ -39,6 +39,7 @@ public class Board {
     // when player shoots and misses store the miss so coordinates
     // can't be selected again (you're welcome user)
     misses.add(shot);
+
   }
 
   public boolean isRepeatShot(int[] shot) {
