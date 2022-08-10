@@ -10,10 +10,13 @@ public class Ships {
 
   ArrayList<Boolean> hitTracker;
 
-  public Ships(ShipType type, ArrayList<int[]> placement, ArrayList<Boolean> hitTracker) {
+  public Ships(ShipType type, ArrayList<int[]> placement) {
     this.type = type;
     this.placement = placement;
-    this.hitTracker = hitTracker;
+    this.hitTracker = new ArrayList<>();
+    for (int[] place : placement) {
+      hitTracker.add(false);
+    }
   }
   // leave orientation to the controller
 
@@ -44,13 +47,27 @@ public class Ships {
     // if all true, return true, else return false
   }
 
-  // Constructor to create ship with type & orientation & starting cordinate
-    // instantiate with false values
-    // type.getSpaces() & add false
-    // maybe put a stream
+  public ShipType getType() {
+    return type;
+  }
 
-  // Methods to Code for Ships
-    // checks occupied coordinates for placement/in general
-    // review hits
-    // is it sunk
+  public void setType(ShipType type) {
+    this.type = type;
+  }
+
+  public ArrayList<int[]> getPlacement() {
+    return placement;
+  }
+
+  public void setPlacement(ArrayList<int[]> placement) {
+    this.placement = placement;
+  }
+
+  public ArrayList<Boolean> getHitTracker() {
+    return hitTracker;
+  }
+
+  public void setHitTracker(ArrayList<Boolean> hitTracker) {
+    this.hitTracker = hitTracker;
+  }
 }

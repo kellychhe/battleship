@@ -40,4 +40,6 @@
       - Constructor, Methods (What should we consider and what should they do)
       - When to switch States
     - Main Class => Get user interaction
+- Post Mentor Meeting Next Steps
+  - Game Class: 
 
