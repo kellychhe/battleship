@@ -6,16 +6,14 @@ import java.util.List;
 
 public class Board {
 
-  public ArrayList<int[]> misses = new ArrayList<>();
-  public ArrayList<Ships> ships = new ArrayList<>();
-
-  // Build constructor or get beat up
-
+  // change to general, instance type can stay the same
+  private List<int[]> misses = new ArrayList<>();
+  private List<Ship> ships = new ArrayList<>();
 
   public void placeShip(ShipType type, ArrayList<int[]> placement) {
     // construct new ship and add to array of ship
 
-    ships.add(new Ships(type, placement));
+    ships.add(new Ship(type, placement));
 
   }
 
@@ -38,10 +36,14 @@ public class Board {
     return false;
   }
 
+  public boolean processEachHit(int[] coordinates) {
+
+  }
+
   private ArrayList<int[]> getAllShipPlacements() {
     ArrayList<int[]> allShipPlacements = new ArrayList<>();
 
-    for (Ships ship : ships) {
+    for (Ship ship : ships) {
       allShipPlacements.addAll(ship.getPlacement());
     }
     return allShipPlacements;
@@ -54,7 +56,7 @@ public class Board {
   public boolean areAllShipsSunk() {
     // check ships for isSunk
     // if a false is hit stop
-    for (Ships ship : ships) {
+    for (Ship ship : ships) {
       if (!ship.isSunk()) {
         return false;
       }
@@ -72,7 +74,7 @@ public class Board {
   public boolean isRepeatShot(int[] shot) {
     List<int[]> allShots = new ArrayList<>();
     // if the coordinates is in the misses array or is a coordinate that was already hit return true
-    for (Ships ship : ships) {
+    for (Ship ship : ships) {
       for (int i = 0; i < ship.placement.size(); i++) {
         if (ship.hitTracker.get(i)) {
           allShots.add(ship.placement.get(i));

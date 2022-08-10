@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Ships {
+public class Ship {
 
   ShipType type;
 
@@ -12,7 +12,7 @@ public class Ships {
 
   public List<Boolean> hitTracker = new ArrayList<>();
 
-  public Ships(ShipType type, ArrayList<int[]> placement) {
+  public Ship(ShipType type, ArrayList<int[]> placement) {
     this.type = type;
     this.placement = placement;
     this.hitTracker = new ArrayList<>();
