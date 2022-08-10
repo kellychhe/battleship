@@ -3,6 +3,17 @@ package com.ahjrkc.battleship.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p></p>
+ *<ul>
+ *   <li>processEachHit: checks if the shot has hit a ship by iterating through each ships coordinates
+ *   to find possible matches. It changes the boolean at the corresponding index of the
+ *   hitTracker ArrayList if a match is found</li>
+ *   <li>isSunk: Iterates through an individual ship placement to see if all sections in ship
+ *   hitTracker field were hit(all true), returns boolean of whether or not that ship has been sunk.</li>
+ *</ul>
+ */
+
 public class Ships {
 
   ShipType type;
