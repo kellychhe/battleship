@@ -17,12 +17,13 @@ public class Board {
 
   }
 
+  // nick approved
   public boolean isConflict(ArrayList<int[]> placement) {
     ArrayList<int[]> allShipPlacements = getAllShipPlacements();
     // do any coordinates overlap with other ships already placed
     for (int[] place : placement) {
       for (int num : place) {
-        if (num < 0 || num > 10) {
+        if (num < 0 || num >= 10) {
           return true;
         }
       }
@@ -37,7 +38,14 @@ public class Board {
   }
 
   public boolean processEachHit(int[] coordinates) {
-
+    boolean hit = false;
+    for (Ship ship : ships) {
+      if (ship.processEachHit(coordinates)) {
+        hit = true;
+        break;
+      }
+    }
+    return hit;
   }
 
   private ArrayList<int[]> getAllShipPlacements() {
