@@ -34,12 +34,23 @@
 4. Presentation
    1. Blue Jawn with a Sailor Hat
 
+Tuesday August 2022, 2022:
 - Mentor Meeting Focuses:
   - Want to: 
-    - Work on Game method
-      - Constructor, Methods (What should we consider and what should they do)
-      - When to switch States
+    - Work on Game method (controller package)
+      - create instance of board, get info from player to tell the board where to place the ship 
+        - Constructor, Methods (What should we consider and what should they do)
+        - When to switch States
+      - Game will ask player for a set of coordinates for target, human player (bufferreader w/ read line with parse)
+      - google : getting input from keyboard in Java
+      - Keep using readline until you get two numbers separated by a comma
+      - TEST get coordinates
     - Main Class => Get user interaction
 - Post Mentor Meeting Next Steps
-  - Game Class: 
+  - Board => Keeps track of ship locations, be aware of any conflicts, check each ship to see if it's been hit
+  - Misses can stay in board (fire elmo, markertype lives!) 
+  - Board Methods: placeShip(ShipType, placement array) => construct new ship and add to array of ships for that player
+    - allShipsSunk method => review all ships to see if they're sunk (end game)
+    - board really only needs to keep track of misses 
+    - board test class 
 
