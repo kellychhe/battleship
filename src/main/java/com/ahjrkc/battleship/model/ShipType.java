@@ -2,6 +2,12 @@ package com.ahjrkc.battleship.model;
 
 import java.util.ArrayList;
 
+/**
+ * <p>This enum contains the five different ships in our game. Each Ship has a size that is not mutable.
+ * The enum also contains a string version of their name.</p>
+ *
+ */
+
 public enum ShipType {
     // General Rule: Enums should not have a mutable state.
     // Dont store location of ships to enum, dont have diff ship type for two players
