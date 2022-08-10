@@ -3,6 +3,7 @@ package com.ahjrkc.battleship.controller;
 import com.ahjrkc.battleship.model.Board;
 import com.ahjrkc.battleship.model.ShipDirection;
 import com.ahjrkc.battleship.model.ShipType;
+import com.ahjrkc.battleship.model.State;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,6 +24,7 @@ public class Game {
 
   // Do not delete below, helps with filtering user coordinates.
   private static final Pattern INPUT_SPLITTER = Pattern.compile("\\D+");
+  private State state;
 
   public int[] shot;
   public ShipType[] fleet = new ShipType[]{
@@ -40,10 +42,21 @@ public class Game {
       ShipDirection.EAST,
       ShipDirection.WEST
   };
-  // put all directions together in an array (hard code)
 
-  Board player = new Board();
-  Board cpu = new Board();
+  public Game(State state) {
+    setState(state);
+  }
+
+  public State getState() {
+    return state;
+  }
+
+  public void setState(State state) {
+    this.state = state;
+  }
+
+  public Board player = new Board();
+  public Board cpu = new Board();
 
   public void greetPlayer() throws IOException {
     BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));

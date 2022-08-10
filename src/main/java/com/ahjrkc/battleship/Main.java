@@ -1,15 +1,27 @@
 package com.ahjrkc.battleship;
 
 import com.ahjrkc.battleship.controller.Game;
+import com.ahjrkc.battleship.model.State;
 import java.io.IOException;
 
 public class Main {
 
   public static void main(String[] args) throws IOException {
-    // testing methods from Game Class
-    Game game = new Game();
-    game.greetPlayer();
-    game.grabUserCoordinates();
+    Game game = new Game(State.PLACEMENT);
+    if (game.getState() == State.PLACEMENT) {
+      game.greetPlayer();
+      // game.setShips(game.cpu)
+      // game.setShips(game.player);
+    }
+    game.setState(State.PLAYER_MOVEMENT);
+    int[] coordinates = game.grabUserCoordinates();
+    if (game.player.processEachHit(coordinates) == false) {
+      game.player.addMiss(coordinates);
+      game.setState(State.CPU_MOVEMENT);
+    } else {
+
+    }
+
   }
 
 
