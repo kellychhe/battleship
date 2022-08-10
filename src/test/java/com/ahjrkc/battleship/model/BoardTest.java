@@ -19,7 +19,7 @@ class BoardTest {
 
     ArrayList<Ships> expected = new ArrayList<>();
     expected.add(new Ships(type, placement));
-    System.out.println(expected);
+
     assertEquals(expected.size(), board.ships.size());
   }
 

@@ -52,13 +52,22 @@ public class Game {
   public void playerSetShips() throws IOException {
 
     for (ShipType ship : fleet) {
+      boolean placementSuccess = false;
+
       System.out.printf("Okay %1$s, it's time to place your %2$s on the board!",
-          playerName, ship.getName());
-      int[] coordinates = grabUserCoordinates();
-      for (ShipDirection direction : directions) {
-        ArrayList<int[]> placement = createPlacement(ship, coordinates, direction);
-        if (player.isConflict(placement)){
-          player.placeShip(ship, placement);
+            playerName, ship.getName());
+
+      while (!placementSuccess) {
+        int[] coordinates = grabUserCoordinates();
+        for (ShipDirection direction : directions) {
+          ArrayList<int[]> placement = createPlacement(ship, coordinates, direction);
+          if (!player.isConflict(placement)){
+            player.placeShip(ship, placement);
+            placementSuccess = true;
+          }
+        }
+        if (!placementSuccess) {
+          System.out.printf("Sorry %s, that is not a valid place for your ship :(", playerName);
         }
       }
       // conditional: if ship is not placed, then ask for coordinates again
