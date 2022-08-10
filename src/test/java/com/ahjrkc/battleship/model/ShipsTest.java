@@ -15,9 +15,9 @@ class ShipsTest {
     placement.add(new int[]{1, 1});
     placement.add(new int[]{1, 2});
     Ships ship = new Ships(ShipType.PATROL_BOAT, placement);
-    assertEquals(ship.processEachHit(1,1), true);
-    assertEquals(ship.processEachHit(1,2), true);
-    assertEquals(ship.processEachHit(1,3), false);
+    assertTrue(ship.processEachHit(1, 1));
+    assertTrue(ship.processEachHit(1, 2));
+    assertFalse(ship.processEachHit(1, 3));
   }
 
 
@@ -27,12 +27,12 @@ class ShipsTest {
     placement.add(new int[]{1, 1});
     placement.add(new int[]{1, 2});
     Ships ship = new Ships(ShipType.PATROL_BOAT, placement);
-    assertEquals(ship.isSunk(), false);
+    assertFalse(ship.isSunk());
     ship.processEachHit(1,1);
-    assertEquals(ship.isSunk(), false);
+    assertFalse(ship.isSunk());
     ship.processEachHit(1,4);
     ship.processEachHit(1,2);
-    assertEquals(ship.isSunk(), true);
+    assertTrue(ship.isSunk());
   }
   // review individual test result with Nick
 }

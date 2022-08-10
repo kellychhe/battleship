@@ -2,6 +2,8 @@ package com.ahjrkc.battleship.model;
 
 public enum State {
 
+  
+
   // game begins as user placing ship (computer can place ships first or after)
 
   // first move (computer or user)
