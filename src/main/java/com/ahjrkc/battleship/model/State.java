@@ -11,8 +11,8 @@ public enum State {
   // five states: placement, movement, repeat turns (if hit), player winner, cpu winner
 
   PLACEMENT,
-  MOVEMENT,
-  REPEAT_TURN,
+  PLAYER_MOVEMENT,
+  CPU_MOVEMENT,
   PLAYER_WIN,
   CPU_WIN;
 
