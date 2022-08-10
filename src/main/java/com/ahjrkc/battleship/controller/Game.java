@@ -1,6 +1,7 @@
 package com.ahjrkc.battleship.controller;
 
 import com.ahjrkc.battleship.model.Board;
+import com.ahjrkc.battleship.model.ShipDirection;
 import com.ahjrkc.battleship.model.ShipType;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
- *
+ * <p>The <strong>Game Class</strong> serves as </p>
  */
 public class Game {
 
@@ -20,9 +21,22 @@ public class Game {
   private static final Pattern INPUT_SPLITTER = Pattern.compile("\\D+");
 
   public int[] shot;
-  public ShipType[] fleet;
-  // loop through ShipType array to check that all ships are placed for both player and cpu
+  public ShipType[] fleet = new ShipType[]{
+      ShipType.CARRIER,
+      ShipType.BATTLESHIP,
+      ShipType.DESTROYER,
+      ShipType.SUBMARINE,
+      ShipType.PATROL_BOAT
+  };
+
   public String playerName;
+  public ShipDirection[] directions = new ShipDirection[]{
+      ShipDirection.NORTH,
+      ShipDirection.SOUTH,
+      ShipDirection.EAST,
+      ShipDirection.WEST
+  };
+  // put all directions together in an array (hard code)
 
   Board player = new Board();
   Board cpu = new Board();
@@ -35,9 +49,38 @@ public class Game {
   }
 
   // get the ship placement from reader :D
-  public void playerSetShips() {
+  public void playerSetShips() throws IOException {
+
+    for (ShipType ship : fleet) {
+      System.out.printf("Okay %1$s, it's time to place your %2$s on the board!",
+          playerName, ship.getName());
+      int[] coordinates = grabUserCoordinates();
+      for (ShipDirection direction : directions) {
+        ArrayList<int[]> placement = createPlacement(ship, coordinates, direction);
+        if (player.isConflict(placement)){
+          player.placeShip(ship, placement);
+        }
+      }
+      // conditional: if ship is not placed, then ask for coordinates again
+    }
+    // create array based on direction -> loop through direction and run each direction method to create a placement array
+    // use isConflict to check if that placement is valid so it doesn't overlap
+        // if true, change direction and create a new array
+        // if false, placeShip (Ships class)
+    // check
+    // for loop => loops through ships in fleet
+      // do/while prompt for userCoordinates
+      // run isConflict (once false, break out of while loop, continue with for loop to begin with next ship
+        // while isConflict = true, prompt user coordinates (do we need?)
+      // outside of while loop => placeShip method (
+  }
+
+  public ArrayList<int[]> createPlacement(ShipType ship, int[] coordinates, ShipDirection Direction) {
     throw new UnsupportedOperationException("Not yet implemented");
   }
+  // Create a method createPlacement(ShipType ship, int[] coordinates, ShipDirection Direction)
+  // Switch cases => based on direction
+  // return placement array
 
   // grab coordinates from user and return shot to be used in other methods
   public int[] grabUserCoordinates() throws IOException {
@@ -57,7 +100,7 @@ public class Game {
           .filter((value) -> value >= 0 && value < 10)
           .limit(2)
           .toArray();
-    } while (shot.length == 0);
+    } while (shot.length != 2);
 
     return shot;
   }

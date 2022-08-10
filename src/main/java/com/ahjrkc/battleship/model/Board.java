@@ -19,7 +19,7 @@ public class Board {
 
   }
 
-  public boolean isConflict(ArrayList<int[]> ships, ArrayList<int[]> placement) {
+  public boolean isConflict(ArrayList<int[]> placement) {
     // do any coordinates overlap with other ships already placed
     return false;
   }

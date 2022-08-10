@@ -70,4 +70,6 @@ public class Ships {
   public void setHitTracker(ArrayList<Boolean> hitTracker) {
     this.hitTracker = hitTracker;
   }
+
+  // add toString
 }
