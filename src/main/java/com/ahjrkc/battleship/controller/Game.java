@@ -27,13 +27,14 @@ public class Game {
   public static final String COMPUTER_HIT = "You hit a CPU ship, good work!";
   public static final String PLAYER_MISS = "Ya missed, der matey.";
   public static final String CPU_MISS = "CPU did not hit anything.";
-  public static final String PLAYER_SUNK_SHIP = "You sunk a CPU ship!";
-  public static final String CPU_SINKS_SHIP = "One of your ships has been sunk!";
+  public static final String PLAYER_SUNK_SHIP = "You sunk a CPU's %1$s!";
+  public static final String CPU_SINKS_SHIP = "Your %1$s has been sunk!";
   public Random rng = new SecureRandom();
 
   // Do not delete below, helps with filtering user coordinates.
   private static final Pattern INPUT_SPLITTER = Pattern.compile("\\D+");
   private State state;
+  private int sunkCount = 0;
 
   public int[] shot;
   public ShipType[] fleet = new ShipType[]{
@@ -204,16 +205,28 @@ public class Game {
   }
 
   public void sinkAnnouncement(Board board) {
-    System.out.println(board.equals(player) ? PLAYER_SUNK_SHIP : CPU_SINKS_SHIP);
+    int length = board.isSunk().size();
+    if(sunkCount != length ){
+      sunkCount ++;
+      System.out.printf(board.equals(player) ? PLAYER_SUNK_SHIP : CPU_SINKS_SHIP, board.isSunk().get(length - 1).getName());
+    }
   }
 
   public void hitAnnouncement(Board board) {
     System.out.println(board.equals(player) ? PLAYER_HIT : COMPUTER_HIT);
+    sinkAnnouncement(board);
   }
   // Consider going into Board class, make a list, and add name of the sunken ship
 
   public void winnerAnnouncement(Board board) {
     System.out.println(board.equals(player) ? PLAYER_WON_MESSAGE : PLAYER_LOSS_MESSAGE);
+  }
+
+  public void sunkenShipName(Board board){
+    if(sunkCount != board.isSunk().size()){
+      sunkCount ++;
+      System.out.println();
+    }
   }
 
   public Board getPlayer() {
