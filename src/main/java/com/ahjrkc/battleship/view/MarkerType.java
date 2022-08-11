@@ -11,30 +11,19 @@ package com.ahjrkc.battleship.view;
  */
 
 public enum MarkerType {
-  MISS('\u00D7', Color.GREY),
-  HIT('\u17D9', Color.RED),
-  SINK('\u0053', Color.GREEN),
-  SHIP('\u2591', Color.BLACK);
+  MISS('\u00D7'),
+  HIT('\u17D9'),
+  SINK('\u0053'),
+  SHIP('\u2591');
   private final char symbol;
-  private final Color color;
 
-  MarkerType(char symbol, Color color) {
+  MarkerType(char symbol) {
     this.symbol = symbol;
-    this.color = color;
   }
 
   public char getSymbol() {
     return symbol;
   }
 
-  public Color getColor() {
-    return color;
-  }
 
-  public enum Color {
-    GREY,
-    RED,
-    GREEN,
-    BLACK
-  }
 }

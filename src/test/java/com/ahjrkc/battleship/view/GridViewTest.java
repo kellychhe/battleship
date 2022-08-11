@@ -12,18 +12,6 @@ import org.junit.jupiter.api.Test;
 class GridViewTest {
 
   @Test
-  void createRowString() {
-    ArrayList<int[]> allShipPlacements = new ArrayList<>();
-    allShipPlacements.add(new int[]{1,1});
-    allShipPlacements.add(new int[]{2,1});
-    allShipPlacements.add(new int[]{3,1});
-    allShipPlacements.add(new int[]{4,1});
-    allShipPlacements.add(new int[]{5,1});
-    GridView line = new GridView(1);
-
-  }
-
-  @Test
   void displayShipPlacement() {
     ArrayList<int[]> allShipPlacements = new ArrayList<>();
     ArrayList<int[]> misses = new ArrayList<>();
