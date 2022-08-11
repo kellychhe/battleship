@@ -22,16 +22,13 @@ public class Main {
           game.winnerAnnouncement(game.player);
           game.setState(State.PLAYER_WIN);
         } else {
-//          game.printGrid(game.player);
           game.printGrid(game.cpu);
           game.hitAnnouncement(game.cpu);
           coordinates = game.grabUserCoordinates();
         }
-        // all in loop that'll iterate as long as not in terminal state
       }
       if (!game.getState().isTerminal()) {
         game.cpu.addMiss(coordinates);
-//        game.printGrid(game.player);
         game.printGrid(game.cpu);
         game.missAnnouncement(game.player);
         game.setState(State.CPU_MOVEMENT);
@@ -46,7 +43,6 @@ public class Main {
             break;
           } else {
             game.printGrid(game.player);
-//            game.printGrid(game.cpu);
             game.hitAnnouncement(game.player);
             coordinates = game.grabRandomCoordinates();
           }
@@ -54,10 +50,8 @@ public class Main {
         if (!game.getState().isTerminal()) {
           game.player.addMiss(coordinates);
           game.printGrid(game.player);
-//          game.printGrid(game.cpu);
           game.missAnnouncement(game.cpu);
         }
-          // invoke a method to have the computer shoot
       }
 
     }

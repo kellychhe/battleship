@@ -16,8 +16,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * <p>The <strong>Game Class</strong> serves as </p>
@@ -36,7 +34,6 @@ public class Game {
   public static final String CPU_SINKS_SHIP = "Your %1$s has been sunk!%n";
   public Random rng = new SecureRandom();
 
-  // Do not delete below, helps with filtering user coordinates.
   private static final Pattern INPUT_SPLITTER = Pattern.compile("\\D+");
   private State state;
   private int sunkCount = 0;
@@ -77,11 +74,8 @@ public class Game {
     BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
     System.out.println("Ahoy there Matey! What is your name?");
     playerName = buffer.readLine().trim();
-    System.out.printf("Welcome to Battleship, %s!%n", playerName);
-    // do you want to place your ships yourself or randomly? => use cpu
-  }
+    System.out.printf("Welcome to Battleship, %s!%n", playerName);}
 
-  // get the ship placement from reader :D
   public void setShips(Board board) throws IOException {
 
     for (ShipType ship : fleet) {
@@ -96,8 +90,7 @@ public class Game {
         int[] coordinates = board.equals(player) ? grabUserCoordinates() : grabRandomCoordinates();
         List<ShipDirection> shuffleDirections = Arrays.asList(directions);
         Collections.shuffle(shuffleDirections);
-        shuffleDirections.toArray();
-        for (ShipDirection direction : directions) {
+        for (ShipDirection direction : shuffleDirections) {
           ArrayList<int[]> placement = createPlacement(ship, coordinates, direction);
           if (!board.isConflict(placement)){
             board.placeShip(ship, placement);
@@ -113,41 +106,8 @@ public class Game {
           System.out.printf("Sorry %s, that is not a valid place for your ship :( %n", playerName);
         }
       }
-      // conditional: if ship is not placed, then ask for coordinates again
     }
   }
-
-  public void printGrid(Board board) {
-    System.out.println(board.equals(player) ? "This is your map." : "This is the computer map.");
-    String[] fullGrid = new String[10];
-    for (int i = 0; i < 10; i++) {
-      GridView row = new GridView(i);
-      if(board.equals(player)){
-        fullGrid[i] = row.addPlacement(board.getAllShipPlacements(),board.getMisses(), board.getAllHits(),
-            board.getCoordinatesOfSunk());
-//        System.out.println(Arrays.toString(fullGrid));
-      } else {
-      fullGrid[i] = row.addMissHitSunk(board.getMisses(), board.getAllHits(),
-          board.getCoordinatesOfSunk());
-      }
-      System.out.println(fullGrid[i]);
-    }
-  }
-
-    // create array based on direction -> loop through direction and run each direction method to create a placement array
-    // use isConflict to check if that placement is valid so it doesn't overlap
-    // if true, change direction and create a new array
-    // if false, placeShip (Ships class)
-    // check
-    // for loop => loops through ships in fleet
-    // do/while prompt for userCoordinates
-    // run isConflict (once false, break out of while loop, continue with for loop to begin with next ship
-    // while isConflict = true, prompt user coordinates (do we need?)
-    // outside of while loop => placeShip method (
-    // do/while prompt for userCoordinates
-    // run isConflict (once false, break out of while loop, continue with for loop to begin with next ship
-    // while isConflict = true, prompt user coordinates (do we need?)
-    // outside of while loop => placeShip method (
 
   public ArrayList<int[]> createPlacement(ShipType ship, int[] coordinates,
       ShipDirection direction) {
@@ -156,33 +116,29 @@ public class Game {
     int col = coordinates[1];
     switch (direction) {
       case NORTH:
-        for (int i = 0; i < ship.spacesFilled - 1; i++) {
+        for (int i = 0; i < ship.getSpacesFilled() - 1; i++) {
           placement.add(new int[]{row - i, col});
         }
         break;
       case SOUTH:
-        for (int i = 0; i < ship.spacesFilled; i++) {
+        for (int i = 0; i < ship.getSpacesFilled(); i++) {
           placement.add(new int[]{row + i, col});
         }
         break;
       case WEST:
-        for (int i = 0; i < ship.spacesFilled; i++) {
+        for (int i = 0; i < ship.getSpacesFilled(); i++) {
           placement.add(new int[]{row, col + i});
         }
         break;
       case EAST:
-        for (int i = 0; i < ship.spacesFilled; i++) {
+        for (int i = 0; i < ship.getSpacesFilled(); i++) {
           placement.add(new int[]{row, col - i});
         }
         break;
     }
     return placement;
   }
-  // Create a method createPlacement(ShipType ship, int[] coordinates, ShipDirection Direction)
-  // Switch cases => based on direction
-  // return placement array
 
-  // grab coordinates from user and return shot to be used in other methods
   public int[] grabUserCoordinates() throws IOException {
     Reader reader = new InputStreamReader(System.in);
     BufferedReader buffer = new BufferedReader(reader);
@@ -219,6 +175,22 @@ public class Game {
     return shot;
   }
 
+  public void printGrid(Board board) {
+    System.out.println(board.equals(player) ? "This is your map." : "This is the computer map.");
+    String[] fullGrid = new String[10];
+    for (int i = 0; i < 10; i++) {
+      GridView row = new GridView(i);
+      if(board.equals(player)){
+        fullGrid[i] = row.addPlacement(board.getAllShipPlacements(),board.getMisses(), board.getAllHits(),
+            board.getCoordinatesOfSunk());
+      } else {
+        fullGrid[i] = row.addMissHitSunk(board.getMisses(), board.getAllHits(),
+            board.getCoordinatesOfSunk());
+      }
+      System.out.println(fullGrid[i]);
+    }
+  }
+
   public void missAnnouncement(Board board) {
     System.out.println(board.equals(player) ? PLAYER_MISS : CPU_MISS);
   }
@@ -235,41 +207,9 @@ public class Game {
     System.out.println(board.equals(player) ? PLAYER_HIT : COMPUTER_HIT);
     sinkAnnouncement(board);
   }
-  // Consider going into Board class, make a list, and add name of the sunken ship
 
   public void winnerAnnouncement(Board board) {
     System.out.println(board.equals(player) ? PLAYER_WON_MESSAGE : PLAYER_LOSS_MESSAGE);
   }
 
-  public void sunkenShipName(Board board){
-    if(sunkCount != board.isSunk().size()){
-      sunkCount ++;
-      System.out.println();
-    }
-  }
-
-  public Board getPlayer() {
-    return player;
-  }
-
-  // use do while loop to keep coordinates in bounds, repeat prompting if they dont get it
-
-  // check isConflict(Board class) for placement, if it is false place the ship(Board Class)
-
-  // repeat until we've gotten through all ships from player
-  // do same for computer w/ randomizer
-
-  // change state to the first players move
-
-  // prompt reader for first shot (coordinates)
-
-  // process each hit(Ships Class) on the cpu to see if cpu was hit
-  // if it returns true run areAllShipsSunk (Board Class), then REPEAT_TURN(State) for player
-
-  // if false run addMiss(Board Class) for player
-
-  // Then change state to CPU_TURN(State) :)
-
-  // Have a throws clause for IllegalPlacementException (extends IllegalArgumentException (checked)
-  // Have a throws clause for GameOverException (extends IllegalStateException) (checked)
 }

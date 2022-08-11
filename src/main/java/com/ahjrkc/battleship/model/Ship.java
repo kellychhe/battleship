@@ -70,24 +70,8 @@ public class Ship {
     return type;
   }
 
-  public void setType(ShipType type) {
-    this.type = type;
-  }
-
   public List<int[]> getPlacement() {
     return placement;
-  }
-
-  public void setPlacement(ArrayList<int[]> placement) {
-    this.placement = placement;
-  }
-
-  public List<Boolean> getHitTracker() {
-    return hitTracker;
-  }
-
-  public void setHitTracker(ArrayList<Boolean> hitTracker) {
-    this.hitTracker = hitTracker;
   }
 
 }

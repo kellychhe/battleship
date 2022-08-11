@@ -1,8 +1,6 @@
 package com.ahjrkc.battleship.view;
 
-import com.ahjrkc.battleship.controller.Game;
 import com.ahjrkc.battleship.model.Board;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,9 +28,9 @@ public class GridView {
   }
 
   public String addPlacement(ArrayList<int[]> allShipPlacements,ArrayList<int[]> misses, ArrayList<int[]> hits, ArrayList<int[]> sunkCoordinates) {
-    for (int i = 0; i < allShipPlacements.size(); i++) {
-      int row = allShipPlacements.get(i)[0];
-      int col = allShipPlacements.get(i)[1];
+    for (int[] allShipPlacement : allShipPlacements) {
+      int row = allShipPlacement[0];
+      int col = allShipPlacement[1];
       if (row == rowIndex) {
         markers[col] = MarkerType.SHIP.getSymbol();
       }
@@ -42,23 +40,23 @@ public class GridView {
 
   public String addMissHitSunk(ArrayList<int[]> misses, ArrayList<int[]> hits,
       ArrayList<int[]> sunkCoordinates) {
-    for (int i = 0; i < misses.size(); i++) {
-      int row = misses.get(i)[0];
-      int col = misses.get(i)[1];
+    for (int[] miss : misses) {
+      int row = miss[0];
+      int col = miss[1];
       if (row == rowIndex) {
         markers[col] = MarkerType.MISS.getSymbol();
       }
     }
-    for (int i = 0; i < hits.size(); i++) {
-      int row = hits.get(i)[0];
-      int col = hits.get(i)[1];
+    for (int[] hit : hits) {
+      int row = hit[0];
+      int col = hit[1];
       if (row == rowIndex) {
         markers[col] = MarkerType.HIT.getSymbol();
       }
     }
-    for (int i = 0; i < sunkCoordinates.size(); i++) {
-      int row = sunkCoordinates.get(i)[0];
-      int col = sunkCoordinates.get(i)[1];
+    for (int[] sunkCoordinate : sunkCoordinates) {
+      int row = sunkCoordinate[0];
+      int col = sunkCoordinate[1];
       if (row == rowIndex) {
         markers[col] = MarkerType.SINK.getSymbol();
       }

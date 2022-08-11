@@ -26,18 +26,13 @@ import java.util.List;
  */
 public class Board {
 
-  // change to general, instance type can stay the same
-  private ArrayList<int[]> misses = new ArrayList<>();
-  private List<Ship> ships = new ArrayList<>();
+  private final ArrayList<int[]> misses = new ArrayList<>();
+  private final List<Ship> ships = new ArrayList<>();
 
   public void placeShip(ShipType type, ArrayList<int[]> placement) {
-    // construct new ship and add to array of ship
-
     ships.add(new Ship(type, placement));
-
   }
 
-  // nick approved
   public boolean isConflict(ArrayList<int[]> placement) {
     ArrayList<int[]> allShipPlacements = getAllShipPlacements();
     // do any coordinates overlap with other ships already placed
@@ -53,7 +48,6 @@ public class Board {
         }
       }
     }
-
     return false;
   }
 
@@ -80,24 +74,13 @@ public class Board {
 
   public ArrayList<int[]> getAllShipPlacements() {
     ArrayList<int[]> allShipPlacements = new ArrayList<>();
-
     for (Ship ship : ships) {
       allShipPlacements.addAll(ship.getPlacement());
-      for (int[] place:ship.getPlacement()){
-//        System.out.println(place[0]);
-//        System.out.println(place[1]);
-      }
     }
     return allShipPlacements;
   }
 
-//  public boolean isShipInbounds(){
-//
-//  }
-
   public boolean areAllShipsSunk() {
-    // check ships for isSunk
-    // if a false is hit stop
     for (Ship ship : ships) {
       if (!ship.isSunk()) {
         return false;
@@ -107,16 +90,12 @@ public class Board {
   }
 
   public void addMiss(int[] shot) {
-    // when player shoots and misses store the miss so coordinates
-    // can't be selected again (you're welcome user)
     misses.add(shot);
-
   }
 
   public boolean isRepeatShot(int[] shot) {
     List<int[]> allShots = getAllHits();
     allShots.addAll(misses);
-
     for (int[] allShot : allShots) {
       if (Arrays.equals(shot, allShot)) {
         return true;
