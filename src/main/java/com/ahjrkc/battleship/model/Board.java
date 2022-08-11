@@ -49,8 +49,8 @@ public class Board {
 
   /**
    * <p>This method delegates work to the Ship class in order to be accessed by the Game class (controller).</p>
-   * @param coordinates
-   * @return
+   * @param coordinates - user entered coordinates from game class methods
+   * @return Returns a boolean.
    */
   public boolean processEachHit(int[] coordinates) {
     boolean hit = false;
