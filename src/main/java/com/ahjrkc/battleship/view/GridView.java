@@ -57,7 +57,7 @@ public class GridView {
   }
 
   // when invoking the following method in controller, make sure to do this one first
-  private void displayShipPlacement(ArrayList<int[]> allShipPlacements) {
+  public void displayShipPlacement(ArrayList<int[]> allShipPlacements) {
     for (int i = 0; i < allShipPlacements.size(); i++) {
       if (allShipPlacements.get(i)[0] == rowIndex) {
         markers[i] = MarkerType.SHIP.getSymbol();
