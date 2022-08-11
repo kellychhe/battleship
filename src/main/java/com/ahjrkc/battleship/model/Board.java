@@ -1,5 +1,6 @@
 package com.ahjrkc.battleship.model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +28,7 @@ import java.util.List;
 public class Board {
 
   // change to general, instance type can stay the same
-  private List<int[]> misses = new ArrayList<>();
+  private ArrayList<int[]> misses = new ArrayList<>();
   private List<Ship> ships = new ArrayList<>();
 
   public void placeShip(ShipType type, ArrayList<int[]> placement) {
@@ -133,4 +134,7 @@ public class Board {
     return sunkCoordinates;
   }
 
+  public ArrayList<int[]> getMisses() {
+    return misses;
+  }
 }

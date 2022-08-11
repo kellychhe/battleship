@@ -4,6 +4,7 @@ import com.ahjrkc.battleship.model.Board;
 import com.ahjrkc.battleship.model.ShipDirection;
 import com.ahjrkc.battleship.model.ShipType;
 import com.ahjrkc.battleship.model.State;
+import com.ahjrkc.battleship.view.GridView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -58,6 +59,7 @@ public class Game {
   public Board player = new Board();
   public Board cpu = new Board();
 
+
   public void greetPlayer() throws IOException {
     BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
     System.out.println("Ahoy there Matey! What is your name?");
@@ -74,14 +76,14 @@ public class Game {
 
       if (board.equals(player)) {
         System.out.printf("Okay %1$s, it's time to place your %2$s on the board!",
-              playerName, ship.getName());
+            playerName, ship.getName());
       }
 
       while (!placementSuccess) {
         int[] coordinates = board.equals(player) ? grabUserCoordinates() : grabRandomCoordinates();
         for (ShipDirection direction : directions) {
           ArrayList<int[]> placement = createPlacement(ship, coordinates, direction);
-          if (!board.isConflict(placement)){
+          if (!board.isConflict(placement)) {
             board.placeShip(ship, placement);
             placementSuccess = true;
           }
@@ -92,40 +94,55 @@ public class Game {
       }
       // conditional: if ship is not placed, then ask for coordinates again
     }
-    // create array based on direction -> loop through direction and run each direction method to create a placement array
-    // use isConflict to check if that placement is valid so it doesn't overlap
-        // if true, change direction and create a new array
-        // if false, placeShip (Ships class)
-    // check
-    // for loop => loops through ships in fleet
-      // do/while prompt for userCoordinates
-      // run isConflict (once false, break out of while loop, continue with for loop to begin with next ship
-        // while isConflict = true, prompt user coordinates (do we need?)
-      // outside of while loop => placeShip method (
   }
 
-  public ArrayList<int[]> createPlacement(ShipType ship, int[] coordinates, ShipDirection direction) {
+  public void printGrid(Board board) {
+    String[] fullGrid = new String[10];
+    for (int i = 0; i < 10; i++) {
+      GridView row = new GridView(i, board);
+      if(board.equals(player)){
+        row.displayShipPlacement(board.getAllShipPlacements());
+      }
+      fullGrid[i] = row.createRowString(board, board.getMisses(), board.getAllHits(),
+          board.getCoordinatesOfSunk());
+      System.out.println(fullGrid[i]);
+    }
+  }
+
+    // create array based on direction -> loop through direction and run each direction method to create a placement array
+    // use isConflict to check if that placement is valid so it doesn't overlap
+    // if true, change direction and create a new array
+    // if false, placeShip (Ships class)
+    // check
+    // for loop => loops through ships in fleet
+    // do/while prompt for userCoordinates
+    // run isConflict (once false, break out of while loop, continue with for loop to begin with next ship
+    // while isConflict = true, prompt user coordinates (do we need?)
+    // outside of while loop => placeShip method (
+
+  public ArrayList<int[]> createPlacement(ShipType ship, int[] coordinates,
+      ShipDirection direction) {
     ArrayList<int[]> placement = new ArrayList<>();
     int row = coordinates[0];
     int col = coordinates[1];
-    switch(direction) {
+    switch (direction) {
       case NORTH:
-        for (int i = row; i < ship.spacesFilled; i++){
+        for (int i = row; i < ship.spacesFilled; i++) {
           placement.add(new int[]{row - i, col});
         }
         break;
       case SOUTH:
-        for (int i = row; i < ship.spacesFilled; i++){
+        for (int i = row; i < ship.spacesFilled; i++) {
           placement.add(new int[]{row + i, col});
         }
         break;
       case WEST:
-        for (int i = col; i < ship.spacesFilled; i++){
+        for (int i = col; i < ship.spacesFilled; i++) {
           placement.add(new int[]{row, col - i});
         }
         break;
       case EAST:
-        for (int i = col; i < ship.spacesFilled; i++){
+        for (int i = col; i < ship.spacesFilled; i++) {
           placement.add(new int[]{row, col + i});
         }
         break;
@@ -166,6 +183,7 @@ public class Game {
     return new int[]{row, col};
 
   }
+
 
   public Board getPlayer() {
     return player;

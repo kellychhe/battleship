@@ -59,6 +59,7 @@ public class Ship {
     // if all true, return true, else return false
   }
 
+
   public ShipType getType() {
     return type;
   }
