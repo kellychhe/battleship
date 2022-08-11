@@ -11,9 +11,11 @@ package com.ahjrkc.battleship.view;
  */
 
 public enum MarkerType {
-  MISS('\u0058', Color.GREY),
-  HIT('\u004F', Color.RED),
-  SINK('\u0053', Color.GREEN);
+  MISS('\u00D7', Color.GREY),
+  HIT('\u17D9', Color.RED),
+  SINK('\u0053', Color.GREEN),
+  SHIP('\u2591', Color.BLACK),
+  NONE('\u3443', Color.BLUE);
 
   private final char symbol;
   private final Color color;
@@ -34,6 +36,8 @@ public enum MarkerType {
   public enum Color {
     GREY,
     RED,
-    GREEN
+    GREEN,
+    BLACK,
+    BLUE
   }
 }

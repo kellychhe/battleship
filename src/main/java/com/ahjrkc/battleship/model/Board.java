@@ -68,7 +68,7 @@ public class Board {
     return hit;
   }
 
-  private ArrayList<int[]> getAllShipPlacements() {
+  public ArrayList<int[]> getAllShipPlacements() {
     ArrayList<int[]> allShipPlacements = new ArrayList<>();
 
     for (Ship ship : ships) {
@@ -100,16 +100,7 @@ public class Board {
   }
 
   public boolean isRepeatShot(int[] shot) {
-    List<int[]> allShots = new ArrayList<>();
-    // if the coordinates is in the misses array or is a coordinate that was already hit return true
-    for (Ship ship : ships) {
-      for (int i = 0; i < ship.placement.size(); i++) {
-        if (ship.hitTracker.get(i)) {
-          allShots.add(ship.placement.get(i));
-        }
-      }
-    }
-
+    List<int[]> allShots = getAllHits();
     allShots.addAll(misses);
 
     for (int[] allShot : allShots) {
@@ -118,6 +109,28 @@ public class Board {
       }
     }
     return false;
+  }
+
+  public ArrayList<int[]> getAllHits() {
+    ArrayList<int[]> allHits = new ArrayList<>();
+    for (Ship ship : ships) {
+      for (int i = 0; i < ship.placement.size(); i++) {
+        if (ship.hitTracker.get(i)) {
+          allHits.add(ship.placement.get(i));
+        }
+      }
+    }
+    return allHits;
+  }
+
+  public ArrayList<int[]> getCoordinatesOfSunk() {
+    ArrayList<int[]> sunkCoordinates = new ArrayList<>();
+    for (Ship ship : ships) {
+      if (ship.isSunk()){
+        sunkCoordinates.addAll(ship.getPlacement());
+      }
+    }
+    return sunkCoordinates;
   }
 
 }

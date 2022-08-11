@@ -167,6 +167,10 @@ public class Game {
 
   }
 
+  public Board getPlayer() {
+    return player;
+  }
+
   // use do while loop to keep coordinates in bounds, repeat prompting if they dont get it
 
   // check isConflict(Board class) for placement, if it is false place the ship(Board Class)
