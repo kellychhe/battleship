@@ -1,6 +1,5 @@
 package com.ahjrkc.battleship.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -84,6 +83,10 @@ public class Board {
 
     for (Ship ship : ships) {
       allShipPlacements.addAll(ship.getPlacement());
+      for (int[] place:ship.getPlacement()){
+//        System.out.println(place[0]);
+//        System.out.println(place[1]);
+      }
     }
     return allShipPlacements;
   }

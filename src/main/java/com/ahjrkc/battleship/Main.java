@@ -21,6 +21,8 @@ public class Main {
           game.winnerAnnouncement(game.player);
           game.setState(State.PLAYER_WIN);
         } else {
+          game.printGrid(game.player);
+          game.printGrid(game.cpu);
           game.hitAnnouncement(game.player);
           coordinates = game.grabUserCoordinates();
         }
@@ -28,22 +30,30 @@ public class Main {
       }
       if (!game.getState().isTerminal()) {
         game.player.addMiss(coordinates);
+        game.printGrid(game.player);
+        game.printGrid(game.cpu);
         game.missAnnouncement(game.player);
         game.setState(State.CPU_MOVEMENT);
         coordinates = game.grabRandomCoordinates();
 
         while (game.cpu.processEachHit(coordinates)) {
           if (game.player.areAllShipsSunk()) {
+            game.printGrid(game.player);
+            game.printGrid(game.cpu);
             game.winnerAnnouncement(game.cpu);
             game.setState(State.CPU_WIN);
             break;
           } else {
+            game.printGrid(game.player);
+            game.printGrid(game.cpu);
             game.hitAnnouncement(game.cpu);
             coordinates = game.grabRandomCoordinates();
           }
         }
         if (!game.getState().isTerminal()) {
           game.cpu.addMiss(coordinates);
+          game.printGrid(game.player);
+          game.printGrid(game.cpu);
           game.missAnnouncement(game.cpu);
         }
           // invoke a method to have the computer shoot

@@ -31,6 +31,7 @@ public class GridView {
   }
 
   public String createRowString(Board board,ArrayList<int[]> misses, ArrayList<int[]> hits, ArrayList<int[]> sunkCoordinates) {
+
     for (int i = 0; i < misses.size(); i++) {
       if (misses.get(i)[0] == rowIndex) {
         markers[i] = MarkerType.MISS.getSymbol();
@@ -46,11 +47,11 @@ public class GridView {
         markers[i] = MarkerType.SINK.getSymbol();
       }
     }
-    for (char marker : markers){
-      if ((int) marker == 0) {
-        marker = MarkerType.NONE.getSymbol();
-      }
-    }
+//    for (char marker : markers){
+//      if ((int) marker == 0) {
+//        marker = MarkerType.NONE.getSymbol();
+//      }
+//    }
     return Stream.of(markers)
         .map(String::new)
         .collect(Collectors.joining());
@@ -61,6 +62,7 @@ public class GridView {
     for (int i = 0; i < allShipPlacements.size(); i++) {
       if (allShipPlacements.get(i)[0] == rowIndex) {
         markers[i] = MarkerType.SHIP.getSymbol();
+//        System.out.println(allShipPlacements.get(i)[0]);
       }
     }
   }
