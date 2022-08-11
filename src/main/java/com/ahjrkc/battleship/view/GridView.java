@@ -12,7 +12,8 @@ public class GridView {
     this.rowIndex = rowIndex;
   }
 
-  public String addPlacement(ArrayList<int[]> allShipPlacements,ArrayList<int[]> misses, ArrayList<int[]> hits, ArrayList<int[]> sunkCoordinates) {
+  public String addPlacement(ArrayList<int[]> allShipPlacements,ArrayList<int[]> misses,
+      ArrayList<int[]> hits, ArrayList<int[]> sunkCoordinates) {
     for (int[] allShipPlacement : allShipPlacements) {
       int row = allShipPlacement[0];
       int col = allShipPlacement[1];

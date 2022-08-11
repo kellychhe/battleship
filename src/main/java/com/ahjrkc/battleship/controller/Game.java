@@ -33,13 +33,15 @@ public class Game {
   public static final String CPU_MISS = "CPU did not hit anything.";
   public static final String CPU_SUNK_SHIP = "You sunk a CPU's %1$s!%n";
   public static final String PLAYER_SUNK_SHIP = "Your %1$s has been sunk!%n";
-  public Random rng = new SecureRandom();
-
   private static final Pattern INPUT_SPLITTER = Pattern.compile("\\D+");
+  public Random rng = new SecureRandom();
   private State state;
+  public String playerName;
   private int sunkCount = 0;
-
   public int[] shot;
+  public Board player = new Board();
+  public Board cpu = new Board();
+
   public ShipType[] fleet = new ShipType[]{
       ShipType.CARRIER,
       ShipType.BATTLESHIP,
@@ -48,13 +50,13 @@ public class Game {
       ShipType.PATROL_BOAT
   };
 
-  public String playerName;
   public ShipDirection[] directions = new ShipDirection[]{
       ShipDirection.NORTH,
       ShipDirection.SOUTH,
       ShipDirection.EAST,
       ShipDirection.WEST
   };
+
 
   public Game(State state) {
     setState(state);
@@ -67,9 +69,6 @@ public class Game {
   public void setState(State state) {
     this.state = state;
   }
-
-  public Board player = new Board();
-  public Board cpu = new Board();
 
   public void greetPlayer() throws IOException {
     BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));

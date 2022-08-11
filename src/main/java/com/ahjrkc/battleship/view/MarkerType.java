@@ -14,7 +14,7 @@ public enum MarkerType {
   MISS('\u00D7'),
   HIT('\u17D9'),
   SINK('\u29C5'),
-  SHIP('\u2591'),
+  SHIP('\u25A9'),
   NONE('\uFE4C');
   private final char symbol;
 
