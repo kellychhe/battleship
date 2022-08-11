@@ -126,7 +126,6 @@ public class Game {
     // run isConflict (once false, break out of while loop, continue with for loop to begin with next ship
     // while isConflict = true, prompt user coordinates (do we need?)
     // outside of while loop => placeShip method (
-  }
     // do/while prompt for userCoordinates
     // run isConflict (once false, break out of while loop, continue with for loop to begin with next ship
     // while isConflict = true, prompt user coordinates (do we need?)
