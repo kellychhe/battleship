@@ -13,8 +13,9 @@ package com.ahjrkc.battleship.view;
 public enum MarkerType {
   MISS('\u00D7'),
   HIT('\u17D9'),
-  SINK('\u0053'),
-  SHIP('\u2591');
+  SINK('\u29C5'),
+  SHIP('\u2591'),
+  NONE('\uFE4C');
   private final char symbol;
 
   MarkerType(char symbol) {

@@ -4,6 +4,7 @@ import com.ahjrkc.battleship.model.Board;
 import com.ahjrkc.battleship.model.ShipDirection;
 import com.ahjrkc.battleship.model.ShipType;
 import com.ahjrkc.battleship.model.State;
+import com.ahjrkc.battleship.model.exceptions.IllegalMoveException;
 import com.ahjrkc.battleship.view.GridView;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,8 +31,8 @@ public class Game {
   public static final String COMPUTER_HIT = "You hit a CPU ship, good work!";
   public static final String PLAYER_MISS = "Ya missed, der matey.";
   public static final String CPU_MISS = "CPU did not hit anything.";
-  public static final String PLAYER_SUNK_SHIP = "You sunk a CPU's %1$s!%n";
-  public static final String CPU_SINKS_SHIP = "Your %1$s has been sunk!%n";
+  public static final String CPU_SUNK_SHIP = "You sunk a CPU's %1$s!%n";
+  public static final String PLAYER_SUNK_SHIP = "Your %1$s has been sunk!%n";
   public Random rng = new SecureRandom();
 
   private static final Pattern INPUT_SPLITTER = Pattern.compile("\\D+");
@@ -144,19 +145,24 @@ public class Game {
     BufferedReader buffer = new BufferedReader(reader);
     do {
       System.out.println();
-      System.out.printf("Ay ay %s, Please enter your coordinates.%n", playerName);
+      System.out.printf("Aye aye %s, Please enter your coordinates.%n", playerName);
       System.out.println();
       System.out.println("Coordinates must be two numbers between 0-9 separated by a comma.");
       String coordinates = buffer.readLine().trim();
-      shot = INPUT_SPLITTER
-          .splitAsStream(coordinates)
-          .map(String::trim)
-          .filter((s) -> !s.isEmpty())
-          .mapToInt(Integer::parseInt)
-          .filter((value) -> value >= 0 && value < NUM_OF_ROWS)
-          .limit(2)
-          .toArray();
-    } while (shot.length != 2 && player.isRepeatShot(shot));
+      try {
+        shot = INPUT_SPLITTER
+            .splitAsStream(coordinates)
+            .map(String::trim)
+            .filter((s) -> !s.isEmpty())
+            .mapToInt(Integer::parseInt)
+            .filter((value) -> value >= 0 && value < NUM_OF_ROWS)
+            .toArray();
+      } catch (IllegalArgumentException e) {
+        //ignore this exception
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    } while (shot.length != 2 || player.isRepeatShot(shot));
 
     return shot;
   }
@@ -199,7 +205,7 @@ public class Game {
     int length = board.isSunk().size();
     if(sunkCount != length ){
       sunkCount ++;
-      System.out.printf(board.equals(player) ? PLAYER_SUNK_SHIP : CPU_SINKS_SHIP, board.isSunk().get(length - 1).getName());
+      System.out.printf(board.equals(player) ? PLAYER_SUNK_SHIP : CPU_SUNK_SHIP, board.isSunk().get(length - 1).getName());
     }
   }
 

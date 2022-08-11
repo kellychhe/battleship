@@ -46,7 +46,11 @@ public class GridView {
         markers[col] = MarkerType.SINK.getSymbol();
       }
     }
-
+    for (int i = 0; i < markers.length; i++) {
+      if (markers[i] == '\u0000') {
+        markers[i] = MarkerType.NONE.getSymbol();
+      }
+    }
     return Stream.of(markers)
         .map(String::new)
         .collect(Collectors.joining());
