@@ -1,7 +1,7 @@
 package com.ahjrkc.battleship.model.exceptions;
 
 /**
- * <p>The GameOverException is thrown if more moves arew attempted after game play has ended.</p>
+ * <p>The GameOverException is thrown if more moves are attempted after game play has ended.</p>
  */
 public class GameOverException extends IllegalStateException {
 
