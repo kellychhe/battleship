@@ -11,8 +11,8 @@ package com.ahjrkc.battleship.view;
  */
 
 public enum MarkerType {
-  MISS('\u00D7'),
-  HIT('\u17D9'),
+  MISS('\u274C'),
+  HIT('\u24BD'),
   SINK('\u29C5'),
   SHIP('\u8239'),
   NONE('\uFE4C');

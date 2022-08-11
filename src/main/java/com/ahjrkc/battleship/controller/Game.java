@@ -161,7 +161,7 @@ public class Game {
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
-    } while (shot.length != 2 || player.isRepeatShot(shot));
+    } while (shot.length != 2 && player.isRepeatShot(shot));
 
     return shot;
   }
