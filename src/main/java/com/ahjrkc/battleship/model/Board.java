@@ -69,6 +69,16 @@ public class Board {
     return hit;
   }
 
+  public ArrayList<ShipType> isSunk() {
+    ArrayList<ShipType> sunkShips = new ArrayList<>();
+    for(Ship ship : ships){
+      if(ship.isSunk()){
+        sunkShips.add(ship.getType());
+      }
+    }
+    return sunkShips;
+  }
+
   public ArrayList<int[]> getAllShipPlacements() {
     ArrayList<int[]> allShipPlacements = new ArrayList<>();
 
