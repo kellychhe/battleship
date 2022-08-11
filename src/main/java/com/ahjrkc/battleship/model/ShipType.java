@@ -1,9 +1,10 @@
 package com.ahjrkc.battleship.model;
 
+import java.util.ArrayList;
+
 /**
- * <p>This enum contains the five different ships in our game. Each Ship has a size that is not mutable.
- * The enum also contains a string version of their name.</p>
- *
+ * <p>This enum contains the five different ships in our game. Each Ship has a size that is not
+ * mutable. The enum also contains a string version of their name.</p>
  */
 
 public enum ShipType {
@@ -21,13 +22,13 @@ public enum ShipType {
       this.name = name;
     }
 
-    public String getName() {
-      return name;
-    }
+  public String getName() {
+    return name;
+  }
 
     public int getSpacesFilled() {
     return spacesFilled;
   }
-  }
+}
 
 
