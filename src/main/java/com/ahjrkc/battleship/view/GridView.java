@@ -25,46 +25,49 @@ public class GridView {
   public Board board;
   public char[] markers = new char[10];
 
-  public GridView(int rowIndex, Board board) {
+  public GridView(int rowIndex) {
     this.rowIndex = rowIndex;
-    this.board = board;
   }
 
-  public String createRowString(Board board,ArrayList<int[]> misses, ArrayList<int[]> hits, ArrayList<int[]> sunkCoordinates) {
+  public String addPlacement(ArrayList<int[]> allShipPlacements,ArrayList<int[]> misses, ArrayList<int[]> hits, ArrayList<int[]> sunkCoordinates) {
+    for (int i = 0; i < allShipPlacements.size(); i++) {
+      int row = allShipPlacements.get(i)[0];
+      int col = allShipPlacements.get(i)[1];
+      if (row == rowIndex) {
+        markers[col] = MarkerType.SHIP.getSymbol();
+      }
+    }
+    return addMissHitSunk(misses, hits, sunkCoordinates);
+  }
 
+  public String addMissHitSunk(ArrayList<int[]> misses, ArrayList<int[]> hits,
+      ArrayList<int[]> sunkCoordinates) {
     for (int i = 0; i < misses.size(); i++) {
-      if (misses.get(i)[0] == rowIndex) {
-        markers[i] = MarkerType.MISS.getSymbol();
+      int row = misses.get(i)[0];
+      int col = misses.get(i)[1];
+      if (row == rowIndex) {
+        markers[col] = MarkerType.MISS.getSymbol();
       }
     }
     for (int i = 0; i < hits.size(); i++) {
-      if (hits.get(i)[0] == rowIndex) {
-        markers[i] = MarkerType.HIT.getSymbol();
+      int row = hits.get(i)[0];
+      int col = hits.get(i)[1];
+      if (row == rowIndex) {
+        markers[col] = MarkerType.HIT.getSymbol();
       }
     }
     for (int i = 0; i < sunkCoordinates.size(); i++) {
-      if (sunkCoordinates.get(i)[0] == rowIndex) {
-        markers[i] = MarkerType.SINK.getSymbol();
+      int row = sunkCoordinates.get(i)[0];
+      int col = sunkCoordinates.get(i)[1];
+      if (row == rowIndex) {
+        markers[col] = MarkerType.SINK.getSymbol();
       }
     }
-//    for (char marker : markers){
-//      if ((int) marker == 0) {
-//        marker = MarkerType.NONE.getSymbol();
-//      }
-//    }
+
     return Stream.of(markers)
         .map(String::new)
         .collect(Collectors.joining());
   }
 
-  // when invoking the following method in controller, make sure to do this one first
-  public void displayShipPlacement(ArrayList<int[]> allShipPlacements) {
-    for (int i = 0; i < allShipPlacements.size(); i++) {
-      if (allShipPlacements.get(i)[0] == rowIndex) {
-        markers[i] = MarkerType.SHIP.getSymbol();
-//        System.out.println(allShipPlacements.get(i)[0]);
-      }
-    }
-  }
 
 }

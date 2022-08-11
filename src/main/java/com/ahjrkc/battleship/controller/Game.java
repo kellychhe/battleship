@@ -102,16 +102,8 @@ public class Game {
           if (!board.isConflict(placement)){
             board.placeShip(ship, placement);
             placementSuccess = true;
-            if (placement.size() == 0){
-              System.out.println(direction);
-            }
             if (board.equals(player)) {
               System.out.printf("%1$s has been placed.%n", ship.getName());
-              for(int[] arr : placement){
-                for(int num:arr){
-                  System.out.println(num);
-                }
-              }
               printGrid(board);
               break;
             }
@@ -126,15 +118,18 @@ public class Game {
   }
 
   public void printGrid(Board board) {
+    System.out.println(board.equals(player) ? "This is your map." : "This is the computer map.");
     String[] fullGrid = new String[10];
     for (int i = 0; i < 10; i++) {
-      GridView row = new GridView(i, board);
+      GridView row = new GridView(i);
       if(board.equals(player)){
-        row.displayShipPlacement(board.getAllShipPlacements());
+        fullGrid[i] = row.addPlacement(board.getAllShipPlacements(),board.getMisses(), board.getAllHits(),
+            board.getCoordinatesOfSunk());
 //        System.out.println(Arrays.toString(fullGrid));
-      }
-      fullGrid[i] = row.createRowString(board, board.getMisses(), board.getAllHits(),
+      } else {
+      fullGrid[i] = row.addMissHitSunk(board.getMisses(), board.getAllHits(),
           board.getCoordinatesOfSunk());
+      }
       System.out.println(fullGrid[i]);
     }
   }
@@ -219,7 +214,7 @@ public class Game {
       grabRandomCoordinates();
     }
     if (state != State.PLACEMENT) {
-      System.out.printf("Computer shot a cannonball at row %1$d and col %2$d!%n", row, col);
+      System.out.printf("Computer shot a cannonball at row %1$d and col %2$d!%n", shot[0], shot[1]);
     }
     return shot;
   }
