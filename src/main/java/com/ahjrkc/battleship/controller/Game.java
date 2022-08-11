@@ -21,6 +21,14 @@ public class Game {
 
   public static final int NUM_OF_ROWS = 10;
   public static final int NUM_OF_COLS = 10;
+  public static final String PLAYER_WON_MESSAGE = "YOU WON! YOU ARE THE CAPTAIN OF THE SEA!";
+  public static final String PLAYER_LOSS_MESSAGE = "YA LOSS, SCALLYWAG. CPU RULES AGAIN.";
+  public static final String PLAYER_HIT = "One of your fleet members has been shot!";
+  public static final String COMPUTER_HIT = "You hit a CPU ship, good work!";
+  public static final String PLAYER_MISS = "Ya missed, der matey.";
+  public static final String CPU_MISS = "CPU did not hit anything.";
+  public static final String PLAYER_SUNK_SHIP = "You sunk a CPU ship!";
+  public static final String CPU_SINKS_SHIP = "One of your ships has been sunk!";
   public Random rng = new SecureRandom();
 
   // Do not delete below, helps with filtering user coordinates.
@@ -59,7 +67,6 @@ public class Game {
   public Board player = new Board();
   public Board cpu = new Board();
 
-
   public void greetPlayer() throws IOException {
     BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
     System.out.println("Ahoy there Matey! What is your name?");
@@ -76,14 +83,14 @@ public class Game {
 
       if (board.equals(player)) {
         System.out.printf("Okay %1$s, it's time to place your %2$s on the board!",
-            playerName, ship.getName());
+              playerName, ship.getName());
       }
 
       while (!placementSuccess) {
         int[] coordinates = board.equals(player) ? grabUserCoordinates() : grabRandomCoordinates();
         for (ShipDirection direction : directions) {
           ArrayList<int[]> placement = createPlacement(ship, coordinates, direction);
-          if (!board.isConflict(placement)) {
+          if (!board.isConflict(placement)){
             board.placeShip(ship, placement);
             placementSuccess = true;
           }
@@ -115,6 +122,11 @@ public class Game {
     // if false, placeShip (Ships class)
     // check
     // for loop => loops through ships in fleet
+    // do/while prompt for userCoordinates
+    // run isConflict (once false, break out of while loop, continue with for loop to begin with next ship
+    // while isConflict = true, prompt user coordinates (do we need?)
+    // outside of while loop => placeShip method (
+  }
     // do/while prompt for userCoordinates
     // run isConflict (once false, break out of while loop, continue with for loop to begin with next ship
     // while isConflict = true, prompt user coordinates (do we need?)
@@ -171,7 +183,7 @@ public class Game {
           .filter((value) -> value >= 0 && value < NUM_OF_ROWS)
           .limit(2)
           .toArray();
-    } while (shot.length != 2);
+    } while (shot.length != 2 && player.isRepeatShot(shot));
 
     return shot;
   }
@@ -180,10 +192,30 @@ public class Game {
     int row = rng.nextInt(NUM_OF_ROWS);
     int col = rng.nextInt(NUM_OF_COLS);
 
-    return new int[]{row, col};
-
+    int[] shot = new int[]{row, col};
+    if (cpu.isRepeatShot(shot)) {
+      grabRandomCoordinates();
+    }
+    System.out.printf("Computer shot a cannonball at row %1$d and col %2$d!", row, col);
+    return shot;
   }
 
+  public void missAnnouncement(Board board) {
+    System.out.println(board.equals(player) ? PLAYER_MISS : CPU_MISS);
+  }
+
+  public void sinkAnnouncement(Board board) {
+    System.out.println(board.equals(player) ? PLAYER_SUNK_SHIP : CPU_SINKS_SHIP);
+  }
+
+  public void hitAnnouncement(Board board) {
+    System.out.println(board.equals(player) ? PLAYER_HIT : COMPUTER_HIT);
+  }
+  // Consider going into Board class, make a list, and add name of the sunken ship
+
+  public void winnerAnnouncement(Board board) {
+    System.out.println(board.equals(player) ? PLAYER_WON_MESSAGE : PLAYER_LOSS_MESSAGE);
+  }
 
   public Board getPlayer() {
     return player;
