@@ -5,7 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class GridView {
-  public int rowIndex;public char[] markers = new char[10];
+  public int rowIndex;
+  public char[] markers = new char[10];
 
   public GridView(int rowIndex) {
     this.rowIndex = rowIndex;
