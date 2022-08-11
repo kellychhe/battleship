@@ -10,7 +10,7 @@ package com.ahjrkc.battleship.view;
  * </ul>
  */
 
-public enum MarkerType extends GridView {
+public enum MarkerType {
   MISS('\u00D7'),
   HIT('\u17D9'),
   SINK('\u29C5'),

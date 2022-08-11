@@ -54,7 +54,7 @@ public class GridView {
     }
     return Stream.of(markers)
         .map(String::new)
-        .collect(Collectors.joining());
+        .collect(Collectors.joining()).replaceAll(".", "$0\t");
   }
 
 
